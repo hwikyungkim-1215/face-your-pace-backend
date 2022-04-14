@@ -14,7 +14,7 @@ jdbc:h2:~/jpashop (최소 한번)
 
 ~/jpashop.mv.db 파일 생성 확인
 
-이후 부터는 jdbc:h2:tcp://localhost/~/jpashop 이렇게 접속
+이후 부터는 jdbc:h2:tcp://localhost/~/fyp0 이렇게 접속
 
 <img width="493" alt="h2셋팅" src="https://user-images.githubusercontent.com/56347876/163377875-93c0819b-503d-49d9-b2f7-3dd6450888ab.png">
 
