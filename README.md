@@ -20,4 +20,4 @@ jdbc:h2:~/jpashop (최소 한번)
 2) cd bin
 3) ./h2.sh
 4) 터미널로 h2를 실행하면 localhost:8082로 접근한다.
-5) JDBC URL을 jdbc:h2:tcp://localhost/~/fyp0로 설정한 후 연결한다.
+5) JDBC URL을 jdbc:h2:tcp://localhost/~/fyp0로, 사용자명은 sa로 설정한 후 연결한다.
