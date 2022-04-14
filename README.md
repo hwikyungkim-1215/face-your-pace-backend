@@ -21,3 +21,13 @@ jdbc:h2:~/jpashop (최소 한번)
 3) ./h2.sh
 4) 터미널로 h2를 실행하면 localhost:8082로 접근한다.
 5) JDBC URL을 jdbc:h2:tcp://localhost/~/fyp0로, 사용자명은 sa로 설정한 후 연결한다.
+
+<img width="493" alt="h2셋팅" src="https://user-images.githubusercontent.com/56347876/163377875-93c0819b-503d-49d9-b2f7-3dd6450888ab.png">
+
+
+## TEST 예시
+# 회원가입 포스트맨 입력 방법
+<img width="857" alt="회원가입_포스트맨TEST" src="https://user-images.githubusercontent.com/56347876/163378077-7626afb0-680c-4091-8edf-f848e9fb9928.png">
+
+# h2 DB 
+<img width="1068" alt="h2_예시" src="https://user-images.githubusercontent.com/56347876/163377955-f203d751-10b8-4ac1-93e1-0ffa927af15f.png">
