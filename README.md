@@ -1,19 +1,9 @@
-# face-your-pace-backend
-
-
-# 설치 방법
-
-## 1. 환경셋팅
-
-
-## 2. DB 셋팅
-
 mysql 오류로 인해 오류 해결 전까지 h2 데이터베이스를 이용합니다.
 
  1. h2 데이터베이스 설치(Version 1.4.200를 사용해주세요)
- 
+
 [1.4.200 버전 다운로드 링크]
-윈도우 설치 버전: https://h2database.com/h2-setup-2019-10-14.exe 
+윈도우 설치 버전: https://h2database.com/h2-setup-2019-10-14.exe
 
 윈도우, 맥, 리눅스 실행 버전: https://h2database.com/h2-2019-10-14.zip
 
