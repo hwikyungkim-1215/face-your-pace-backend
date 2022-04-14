@@ -16,6 +16,7 @@ jdbc:h2:~/jpashop (최소 한번)
 
 이후 부터는 jdbc:h2:tcp://localhost/~/jpashop 이렇게 접속
 
+<img width="493" alt="h2셋팅" src="https://user-images.githubusercontent.com/56347876/163377875-93c0819b-503d-49d9-b2f7-3dd6450888ab.png">
 
 ## 3. 데이터베이스 실행하기
 
@@ -25,7 +26,7 @@ jdbc:h2:~/jpashop (최소 한번)
 4) 터미널로 h2를 실행하면 localhost:8082로 접근한다.
 5) JDBC URL을 jdbc:h2:tcp://localhost/~/fyp0로, 사용자명은 sa로 설정한 후 연결한다.
 
-<img width="493" alt="h2셋팅" src="https://user-images.githubusercontent.com/56347876/163377875-93c0819b-503d-49d9-b2f7-3dd6450888ab.png">
+<img width="483" alt="h2_t" src="https://user-images.githubusercontent.com/56347876/163378588-24ca2076-8788-498c-a034-000f3555b7cd.png">
 
 
 ## TEST 예시
