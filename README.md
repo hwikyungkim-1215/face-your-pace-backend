@@ -26,8 +26,8 @@ jdbc:h2:~/jpashop (최소 한번)
 
 
 ## TEST 예시
-# 회원가입 포스트맨 입력 방법
+### 회원가입 포스트맨 입력 방법
 <img width="857" alt="회원가입_포스트맨TEST" src="https://user-images.githubusercontent.com/56347876/163378077-7626afb0-680c-4091-8edf-f848e9fb9928.png">
 
-# h2 DB 
+### h2 DB 
 <img width="1068" alt="h2_예시" src="https://user-images.githubusercontent.com/56347876/163377955-f203d751-10b8-4ac1-93e1-0ffa927af15f.png">
