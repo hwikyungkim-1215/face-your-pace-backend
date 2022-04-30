@@ -43,4 +43,9 @@ jdbc:h2:~/fyp0 (최소 한번)
 <img width="870" alt="플레이리스트 속 음악 목록 확인" src="https://user-images.githubusercontent.com/56347876/166095711-0a0b0b6c-e270-45d7-a672-77d77e83976a.png">
 
 ### h2 DB 
+
+#### 회원 DB
 <img width="1068" alt="h2_예시" src="https://user-images.githubusercontent.com/56347876/163377955-f203d751-10b8-4ac1-93e1-0ffa927af15f.png">
+
+#### 음악/플레이리스트 DB -> 구조를 좀 수정해야 할 것 같아요
+<img width="840" alt="음악:플레이리스트 DB" src="https://user-images.githubusercontent.com/56347876/166095931-643a61e4-59dd-47fd-9528-f866dd93ebda.png">
