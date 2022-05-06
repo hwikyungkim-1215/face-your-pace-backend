@@ -31,7 +31,9 @@ dependencies {
 	testImplementation("org.junit.vintage:junit-vintage-engine") {
 		exclude group: "org.hamcrest", module: "hamcrest-core"
 	}
-	runtimeOnly 'com.h2database:h2'
+	// DB 연동
+	//runtimeOnly 'com.h2database:h2'
+	implementation 'mysql:mysql-connector-java'
 }
 
 test {
