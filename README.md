@@ -1,51 +1,67 @@
-mysql 오류로 인해 오류 해결 전까지 h2 데이터베이스를 이용합니다.
+## 1. 셋팅 환경
+### IntelliJ, MySQL
 
-## 1. h2 데이터베이스 설치(Version 1.4.200를 사용해주세요)
+## 2. 데이터베이스 설정
 
- [1.4.200버전 다운]
- 
- 윈도우 설치 버전: https://h2database.com/h2-setup-2019-10-14.exe
+### application.yml 설정
 
- 윈도우, 맥, 리눅스 실행 버전: https://h2database.com/h2-2019-10-14.zip
+mysql 정보 설정
+- username: mysql 유저네임으로 수정
+- password: mysql 비밀번호로 수정
+- mysql 스키마 이름은 fyp_db로 설정하기
 
-## 2. h2 설치 후 데이터베이스 파일 생성하기
+데이터 보존 설정
+- delete: 재실행시 데이터 다 날라감(초기화 할 때 사용)
+- update: 재실행시 데이터 보존
+<img width="956" alt="스크린샷 2022-05-11 오후 8 04 22" src="https://user-images.githubusercontent.com/56347876/167835203-73f496a7-4d17-49c4-855a-021e2117ef26.png">
 
-jdbc:h2:~/fyp0 (최소 한번)
+## 3. 백엔드 구조
 
-~/fyp0.mv.db 파일 생성 확인
+- music: 음악 설정값을 통해 음악 추가
 
-이후 부터는 jdbc:h2:tcp://localhost/~/fyp0 이렇게 접속
+- playList: 플레이리스트 생성
 
-<img width="493" alt="h2셋팅" src="https://user-images.githubusercontent.com/56347876/163377875-93c0819b-503d-49d9-b2f7-3dd6450888ab.png">
+- music과 playList는 상속관계
 
-## 3. 데이터베이스 실행하기
+(여기선 로컬에 이미 존재하는 음악을 기준으로 한다)
+1. 회원1이 플레이리스트를 추가한다(music_id와 playList_id로 연결하여 추가하게 된다)
+2. 회원1이 음악을 추가한다
+3. 음악과 플레이리스트는 상속관계  
 
-1) 터미널에서 h2가 설치된 위치로 이동(cd)
-2) cd bin
-3) ./h2.sh
-4) 터미널로 h2를 실행하면 localhost:8082로 접근한다.
-5) JDBC URL을 jdbc:h2:tcp://localhost/~/fyp0로, 사용자명은 sa로 설정한 후 연결한다.
+-> 아래 예시를 참고로 하면,
+play_list 테이블은 member_id와의 관계를 나타낸다.
+play_list_music 테이블은 music_id와 play_list_id의 관계를 나타낸다.
 
-<img width="483" alt="h2_t" src="https://user-images.githubusercontent.com/56347876/163378588-24ca2076-8788-498c-a034-000f3555b7cd.png">
+ex) member테이블에서 id가 1인 회원이 music테이블의 id가 5인 음악을 플레이리스트(play_list테이블에서 id는 8)에추가하면,
+play_list테이블에 member_id 1과 play_list_id 8이 추가되고
+play_list_music테이블에 music_id 15과 play_list_id 8이 추가된다.
 
+### 주의! 
+회원가입 후 로그인을 해야 이후 기능을 실행할 수 있다.(접근 제한)
 
-## TEST 예시
+## 4. TEST 예시
 ### 회원가입 포스트맨 입력 방법
 <img width="857" alt="회원가입_포스트맨TEST" src="https://user-images.githubusercontent.com/56347876/163378077-7626afb0-680c-4091-8edf-f848e9fb9928.png">
+
+#### MySQL member table
+<img width="1025" alt="member" src="https://user-images.githubusercontent.com/56347876/167833894-3b0d4fb6-5ca1-4be3-ba4d-60c8a3a3c613.png">
 
 ### 로그인 포스트맨 입력 방법
 <img width="858" alt="로그인" src="https://user-images.githubusercontent.com/56347876/166095828-fcc31652-9dc8-4a4d-b31b-9e233a018d22.png">
 
 ### 음악 추가 포스트맨 입력 방법(회원가입 -> 로그인 진행 후에 접근 가능)
-<img width="893" alt="음악 추가" src="https://user-images.githubusercontent.com/56347876/166095706-43f32b25-42b7-4869-b414-4907f97b8740.png">
+<img width="864" alt="음악 설정 추가" src="https://user-images.githubusercontent.com/56347876/167833873-f4300fe4-bc39-4632-b500-906c2b20f573.png">
 
-### 플레이리스트 속 음악 목록 확인 포스트맨 입력 방법
-<img width="870" alt="플레이리스트 속 음악 목록 확인" src="https://user-images.githubusercontent.com/56347876/166095711-0a0b0b6c-e270-45d7-a672-77d77e83976a.png">
+#### MySQL music table
+<img width="815" alt="music table" src="https://user-images.githubusercontent.com/56347876/167833900-45c9ed62-4f06-4eb1-9241-8210aa025c84.png">
 
-### h2 DB 
 
-#### 회원 DB
-<img width="1068" alt="h2_예시" src="https://user-images.githubusercontent.com/56347876/163377955-f203d751-10b8-4ac1-93e1-0ffa927af15f.png">
+### 플레이리스트 추가
+<img width="871" alt="플레이리스트 추가" src="https://user-images.githubusercontent.com/56347876/167833884-4f02901e-2611-4ebe-bf73-e145fac462fa.png">
 
-#### 음악/플레이리스트 DB -> 구조를 좀 수정해야 할 것 같아요
-<img width="840" alt="음악:플레이리스트 DB" src="https://user-images.githubusercontent.com/56347876/166095931-643a61e4-59dd-47fd-9528-f866dd93ebda.png">
+#### MySQL play_list table
+<img width="813" alt="플레이리스트 table" src="https://user-images.githubusercontent.com/56347876/167833891-ace2d194-5ba3-4b3c-9edd-5cc924759113.png">
+
+### MySQL play_list_music table
+<img width="815" alt="playListMusic table" src="https://user-images.githubusercontent.com/56347876/167833908-8ccb5b56-a037-4029-889e-cf7df902d7df.png">
+
