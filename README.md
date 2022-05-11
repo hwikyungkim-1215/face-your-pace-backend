@@ -34,6 +34,8 @@ ex) member테이블에서 id가 1인 회원이 music테이블의 id가 5인 음�
 play_list테이블에 member_id 1과 play_list_id 8이 추가되고
 play_list_music테이블에 music_id 15과 play_list_id 8이 추가된다.
 
+### 주의! 
+회원가입 후 로그인을 해야 이후 기능을 실행할 수 있다.
 
 ## 4. TEST 예시
 ### 회원가입 포스트맨 입력 방법
