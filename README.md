@@ -8,7 +8,7 @@
 mysql 정보 설정
 - username: mysql 유저네임으로 수정
 - password: mysql 비밀번호로 수정
-<img width="1057" alt="yml" src="https://user-images.githubusercontent.com/56347876/167833825-6ab68de5-c90a-4d56-a723-34beb9d0adc9.png">
+<img width="956" alt="스크린샷 2022-05-11 오후 8 04 22" src="https://user-images.githubusercontent.com/56347876/167835203-73f496a7-4d17-49c4-855a-021e2117ef26.png">
 
 
 ## 3. TEST 예시
