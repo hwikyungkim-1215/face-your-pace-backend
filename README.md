@@ -9,6 +9,7 @@ mysql 정보 설정
 - username: mysql 유저네임으로 수정
 - password: mysql 비밀번호로 수정
 - mysql 스키마 이름은 fyp_db로 설정하기
+
 데이터 보존 설정
 - delete: 재실행시 데이터 다 날라감(초기화 할 때 사용)
 - update: 재실행시 데이터 보존
