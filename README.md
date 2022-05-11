@@ -17,10 +17,11 @@ mysql 정보 설정
 
 ## 3. 백엔드 구조
 
-music: 음악 설정값을 통해 음악 추가
-playList: 플레이리스트 생성
+- music: 음악 설정값을 통해 음악 추가
 
-music과 playList는 상속관계
+- playList: 플레이리스트 생성
+
+- music과 playList는 상속관계
 
 (여기선 로컬에 이미 존재하는 음악을 기준으로 한다)
 1. 회원1이 플레이리스트를 추가한다(music_id와 playList_id로 연결하여 추가하게 된다)
@@ -36,7 +37,7 @@ play_list테이블에 member_id 1과 play_list_id 8이 추가되고
 play_list_music테이블에 music_id 15과 play_list_id 8이 추가된다.
 
 ### 주의! 
-회원가입 후 로그인을 해야 이후 기능을 실행할 수 있다.
+회원가입 후 로그인을 해야 이후 기능을 실행할 수 있다.(접근 제한)
 
 ## 4. TEST 예시
 ### 회원가입 포스트맨 입력 방법
