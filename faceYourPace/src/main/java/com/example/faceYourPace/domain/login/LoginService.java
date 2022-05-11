@@ -1,10 +1,9 @@
 package com.example.faceYourPace.domain.login;
 
 import com.example.faceYourPace.domain.member.Member;
-import com.example.faceYourPace.domain.member.MemberRepository;
+import com.example.faceYourPace.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

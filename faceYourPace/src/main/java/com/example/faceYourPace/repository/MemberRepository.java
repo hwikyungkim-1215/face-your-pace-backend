@@ -1,5 +1,6 @@
-package com.example.faceYourPace.domain.member;
+package com.example.faceYourPace.repository;
 
+import com.example.faceYourPace.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

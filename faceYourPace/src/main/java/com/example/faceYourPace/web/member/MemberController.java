@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class MemberController {
     }
 
     @PostMapping("/auth/signup")
-    public String create(@Valid com.example.faceYourPace.web.member.MemberForm form, BindingResult result) {
+    public String create(@Valid MemberForm form, BindingResult result) {
 
         if (result.hasErrors()) {
             return "false";
@@ -40,6 +41,7 @@ public class MemberController {
         member.setUserAge(form.getUserAge());
         member.setUserHeight(form.getUserHeight());
         member.setUserWeight(form.getUserWeight());
+        member.setCreateDate(LocalDateTime.now());
 
         memberService.join(member);
         return "true";

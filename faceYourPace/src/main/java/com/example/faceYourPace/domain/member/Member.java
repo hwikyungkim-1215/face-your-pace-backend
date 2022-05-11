@@ -1,11 +1,14 @@
 package com.example.faceYourPace.domain.member;
 
+import com.example.faceYourPace.domain.PlayList;
+import com.example.faceYourPace.domain.music.Music;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +31,12 @@ public class Member {
     private String userAge; // 나이
     private String userHeight; // 키
     private String userWeight; // 몸무게
+
+    private LocalDateTime createDate;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<PlayList> playLists = new ArrayList<>(); // orders
 
 }
