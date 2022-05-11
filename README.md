@@ -60,6 +60,6 @@ play_list_music테이블에 music_id 15과 play_list_id 8이 추가된다.
 #### MySQL play_list table
 <img width="813" alt="플레이리스트 table" src="https://user-images.githubusercontent.com/56347876/167833891-ace2d194-5ba3-4b3c-9edd-5cc924759113.png">
 
-###MySQL play_list_music table
+### MySQL play_list_music table
 <img width="815" alt="playListMusic table" src="https://user-images.githubusercontent.com/56347876/167833908-8ccb5b56-a037-4029-889e-cf7df902d7df.png">
 
