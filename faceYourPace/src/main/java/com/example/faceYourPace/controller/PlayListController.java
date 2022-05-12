@@ -50,7 +50,7 @@ public class PlayListController {
 
  */
     @PostMapping("/api/music/playlist/add")
-    public String playList(@RequestParam("memberId") Long memberId,
+    public String playList(@RequestParam("userId") Long memberId,
                            @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
 
         playListService.playList(memberId, musicId);
