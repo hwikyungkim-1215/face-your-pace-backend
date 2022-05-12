@@ -1,5 +1,7 @@
 package com.example.faceYourPace.repository;
 
+import com.example.faceYourPace.domain.PlayList;
+import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.music.Music;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -25,8 +27,18 @@ public class MusicRepository {
         return em.find(Music.class, id);
     }
 
+    public Music findOne2(String musicName) {
+        return em.find(Music.class, musicName);
+    }
+
     public List<Music> findAll() {
         return em.createQuery("select i from Music i", Music.class)
+                .getResultList();
+    }
+
+    public List<Music> findByUserId(String userId) {
+        return em.createQuery("select m from Member m where m.userId = :userId", Music.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 }

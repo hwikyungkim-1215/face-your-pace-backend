@@ -16,8 +16,10 @@ import java.util.List;
 @Getter @Setter
 public class Member {
 
-    @Id @GeneratedValue
+
+    @Id
     @Column(name = "ID")
+    @GeneratedValue
     private Long id;
 
     private String userId; //로그인 ID

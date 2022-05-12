@@ -1,9 +1,11 @@
 package com.example.faceYourPace.controller;
 
 import com.example.faceYourPace.domain.PlayList;
+import com.example.faceYourPace.domain.PlayListMusic;
 import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.member.MemberService;
 import com.example.faceYourPace.domain.music.Music;
+import com.example.faceYourPace.repository.PlayListRepository;
 import com.example.faceYourPace.repository.PlayListSearch;
 import com.example.faceYourPace.service.MusicService;
 import com.example.faceYourPace.service.PlayListService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+
 @RestController
 @RequiredArgsConstructor
 public class PlayListController {
@@ -23,7 +26,9 @@ public class PlayListController {
     private final MemberService memberService;
     private final MusicService musicService;
 
-    @GetMapping("/playList")
+    private final PlayListRepository playListRepository;
+
+    //@GetMapping("/api/music/playlist/add")
     public String createForm(Model model) {
 
         List<Member> members = memberService.findMembers();
@@ -34,21 +39,59 @@ public class PlayListController {
 
         return "플레이리스트 form";
     }
+/*
+    @PostMapping("/api/music/playlist/add")
+    public String playListAdd(@RequestParam("userId") String userId,
+                        @RequestParam("musicName") String musicName) { // 플레이리스트 추가
 
+        playListService.playList(userId, musicName);
+        return "true";
+    }
+
+ */
     @PostMapping("/api/music/playlist/add")
     public String playList(@RequestParam("memberId") Long memberId,
-                        @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
+                           @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
 
         playListService.playList(memberId, musicId);
         return "true";
     }
 
-    @GetMapping("/api/mypage/playlist")
+/*
+    //테스트 입니다.
+    @RequestMapping(value="/api/music/playlist/add", method= {RequestMethod.POST})
+    public String playListAdd(Model model, @RequestParam(value="userId", required = false) String userId,
+                            @RequestParam(value="musicName", required=false) String musicName) throws Exception {
+
+        playListService.playList(userId, musicName);
+        return "true";
+    }
+
+    @GetMapping("/api/mypage/playlist/{userId}")
     public String playListList(@ModelAttribute("playListSearch") PlayListSearch playListSearch, Model model) {
         List<PlayList> playLists = playListService.findPlayLists(playListSearch);
         model.addAttribute("playlists", playLists);
         // userId의 플레이리스트 목록
         return "true";
+    }
+
+ */
+/*
+    @GetMapping("/api/mypage/playlist/{userId}")
+    List<PlayList> getUserIdAllDate(@PathVariable("userId") String userId) { // userId의 플레이리스트 목록
+        return playListRepository.findByUserId(userId);
+    }
+
+ */
+
+    @GetMapping("/api/mypage/playlist/{memberId}")
+    List<PlayList> getUserIdAllDate(@PathVariable("memberId") Long memberId) { // userId의 플레이리스트 목록
+        return playListRepository.findById(memberId);
+    }
+
+    @GetMapping("/api/play/list")
+    List<PlayList> getAll() { // 플레이리스트 출력 -> 왜 안됌?
+        return playListRepository.findAll();
     }
 
 

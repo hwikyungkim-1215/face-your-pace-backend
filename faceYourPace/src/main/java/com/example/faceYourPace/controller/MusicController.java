@@ -1,7 +1,9 @@
 package com.example.faceYourPace.controller;
 
+import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.music.Music;
 import com.example.faceYourPace.domain.music.MusicForm;
+import com.example.faceYourPace.repository.MusicRepository;
 import com.example.faceYourPace.service.MusicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import java.util.List;
 public class MusicController {
 
     private final MusicService musicService;
+    private final MusicRepository musicRepository;
 
     @GetMapping("/api/music/add")
     public String createForm(Model model) {
@@ -35,12 +38,18 @@ public class MusicController {
         musicService.saveMusic(music);
         return "true";
     }
-
+/*
     @GetMapping("/api/music/list")
     public String list(Model model) {
         List<Music> items = musicService.findMusics();
         model.addAttribute("items", items);
         return "음악리스트 출력";
+    }
+
+ */
+    @GetMapping("/api/music/list")
+    List<Music> getAll() { // 음악리스트 출력
+        return musicRepository.findAll();
     }
 
     @GetMapping("api/music/{musicId}/edit")
@@ -58,11 +67,10 @@ public class MusicController {
         return "음악 설정 update";
     }
 
-    @PostMapping("items/{itemId}/edit")
+    @PostMapping("api/music/{musicId}/edit")
     public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {
 
         musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat());
-
         return "음악 설정 update";
     }
 }

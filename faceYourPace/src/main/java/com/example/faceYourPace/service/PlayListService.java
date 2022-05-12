@@ -33,7 +33,8 @@ public class PlayListService {
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
         Music music = musicRepository.findOne(musicId);
-
+        //Member member = memberRepository.findOne2(userId);
+        //Music music = musicRepository.findOne2(musicName);
 
         //주문상품 생성
         PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);

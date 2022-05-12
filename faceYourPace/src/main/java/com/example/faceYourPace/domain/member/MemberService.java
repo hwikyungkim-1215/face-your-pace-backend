@@ -1,6 +1,7 @@
 package com.example.faceYourPace.domain.member;
 
 import com.example.faceYourPace.repository.MemberRepository;
+import com.example.faceYourPace.web.member.MemberForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +35,48 @@ public class MemberService {
 
     //회원 전체 조회
     public List<Member> findMembers() {
+
         return memberRepository.findAll();
     }
 
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    /**
+     * 회원 수정
+     */
+
+    /*
+    @Transactional
+    public void update(Long id, String userName, String userEmail, String userAge, String userHeight, String userWeight) {
+        Member member = memberRepository.findOne(id);
+        member.setUserName(userName);
+        member.setUserAge(userAge);
+        member.setUserEmail(userEmail);
+        member.setUserHeight(userHeight);
+        member.setUserWeight(userWeight);
+    }
+
+     */
+    @Transactional
+    public Member update(Long id, Member member) {
+        // 1. 영속화
+        // 1. 무조건 찾았다. 걱정마 get() 2. 못찾았어 익섹션 발동시킬께 orElseThrow()
+        Member userEntity = memberRepository.findOne(id);
+
+        // 2. 영속화된 오브젝트를 수정 - 더티체킹 (업데이트 완료)
+        userEntity.setUserId(member.getUserId());
+
+        userEntity.setUserName(member.getUserName());
+        userEntity.setUserEmail(member.getUserEmail());
+        userEntity.setUserAge(member.getUserAge());
+        userEntity.setUserWeight(member.getUserWeight());
+        userEntity.setUserHeight(member.getUserHeight());
+
+        return userEntity;
+    } // 더티체킹이 일어나서 업데이트가 완료됨.
+
+
 
 }

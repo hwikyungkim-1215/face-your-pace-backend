@@ -1,6 +1,8 @@
 package com.example.faceYourPace.repository;
 
 import com.example.faceYourPace.domain.PlayList;
+import com.example.faceYourPace.domain.member.Member;
+import com.example.faceYourPace.domain.music.Music;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +27,12 @@ public class PlayListRepository {
 
     public PlayList findOne(Long id) {
         return em.find(PlayList.class, id);
+    }
+
+
+    public List<PlayList> findAll() {
+        return em.createQuery("select i from PlayList i", PlayList.class)
+                .getResultList();
     }
 
     public List<PlayList> findAllByString(PlayListSearch playListSearch) {
@@ -77,5 +85,10 @@ public class PlayListRepository {
         return query.getResultList();
     }
 
+    public List<PlayList> findById(Long id) {
+        return em.createQuery("select m from Member m where m.id = :memberId", PlayList.class)
+                .setParameter("memberId", id)
+                .getResultList();
+    }
 }
 
