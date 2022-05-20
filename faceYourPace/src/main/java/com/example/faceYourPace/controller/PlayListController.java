@@ -28,7 +28,7 @@ public class PlayListController {
 
     private final PlayListRepository playListRepository;
 
-    //@GetMapping("/api/music/playlist/add")
+    @GetMapping("/api/music/playlist/add2")
     public String createForm(Model model) {
 
         List<Member> members = memberService.findMembers();
@@ -55,6 +55,17 @@ public class PlayListController {
 
         playListService.playList(memberId, musicId);
         return "true";
+    }
+
+    @PostMapping("/api/music/playlist/add2")
+    public String playListAdd(@RequestParam("userId") String userId,
+                           @RequestParam(value = "musicName",required = false) String musicName) { // 플레이리스트 추가
+
+        System.out.println("userId:" + userId);
+        System.out.println("musicName:"+ musicName);
+
+        playListService.playListAdd(userId, musicName);
+        return "플레이리스트 추가";
     }
 
 /*

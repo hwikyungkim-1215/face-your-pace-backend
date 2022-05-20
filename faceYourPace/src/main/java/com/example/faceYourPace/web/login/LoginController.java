@@ -20,6 +20,12 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
+    @PostMapping("/test")
+    @ResponseBody
+    public String testapi(String s){
+        System.out.println(s);
+        return "성공했습니당~!!!!";
+    }
 
     private final LoginService loginService;
     private final SessionManager sessionManager;
@@ -35,11 +41,13 @@ public class LoginController {
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
 
+        System.out.println(form.toString());
         if (bindingResult.hasErrors()) {
             return "false";
         }
 
         Member loginMember = loginService.login(form.getUserId(), form.getUserPw());
+
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

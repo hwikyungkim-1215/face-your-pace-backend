@@ -44,6 +44,9 @@ public class MemberController {
         member.setUserHeight(form.getUserHeight());
         member.setUserWeight(form.getUserWeight());
         member.setCreateDate(LocalDateTime.now());
+        member.setStride(form.getStride());
+        member.setTarget_pace(form.getTarget_pace());
+        member.setWorkout_level(form.getWorkout_level());
 
         memberService.join(member);
         return "true";
@@ -77,6 +80,9 @@ public class MemberController {
         form.setUserAge(member.getUserAge());
         form.setUserHeight(member.getUserHeight());
         form.setUserWeight(member.getUserWeight());
+        form.setStride(member.getStride());
+        form.setTarget_pace(member.getTarget_pace());
+        form.setWorkout_level(member.getWorkout_level());
 
         model.addAttribute("form", form);
         return "회원정보 update";
@@ -84,9 +90,7 @@ public class MemberController {
 
     @PostMapping("auth/user/{memberId}/edit")
     public String updateMember(@PathVariable Long memberId, @ModelAttribute("form") Member member) {
-
         memberService.update(memberId, member);
-
         return "회원정보 update";
     }
 }

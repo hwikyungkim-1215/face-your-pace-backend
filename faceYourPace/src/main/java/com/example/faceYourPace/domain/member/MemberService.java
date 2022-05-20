@@ -1,5 +1,6 @@
 package com.example.faceYourPace.domain.member;
 
+import com.example.faceYourPace.domain.music.Music;
 import com.example.faceYourPace.repository.MemberRepository;
 import com.example.faceYourPace.web.member.MemberForm;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,10 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+    public List<Member> findUserId(String userId) {
+        return memberRepository.findByUserId(userId);
+    }
 
     /**
      * 회원 가입

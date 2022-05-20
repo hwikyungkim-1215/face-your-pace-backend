@@ -35,6 +35,7 @@ public class MusicController {
         music.setMusicEnd(form.getMusicEnd());
         music.setMusicRepeat(form.getMusicRepeat());
         music.setCreateDate(LocalDateTime.now());
+        music.setMusicImg_url(form.getMusicImg_url());
         musicService.saveMusic(music);
         return "true";
     }
@@ -62,6 +63,7 @@ public class MusicController {
         form.setMusicStart(music.getMusicStart());
         form.setMusicEnd(music.getMusicEnd());
         form.setMusicRepeat(music.getMusicRepeat());
+        form.setMusicImg_url(music.getMusicImg_url());
 
         model.addAttribute("form", form);
         return "음악 설정 update";

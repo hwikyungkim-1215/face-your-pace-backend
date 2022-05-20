@@ -36,9 +36,13 @@ public class MusicRepository {
                 .getResultList();
     }
 
-    public List<Music> findByUserId(String userId) {
-        return em.createQuery("select m from Member m where m.userId = :userId", Music.class)
-                .setParameter("userId", userId)
+    public List<Music> findByMusicName(String musicName) {
+        return em.createQuery("select m from Music m where m.musicName = :musicName", Music.class)
+                .setParameter("musicName", musicName)
                 .getResultList();
+    }
+
+    public Music findMusicName(String musicName) {
+        return em.find(Music.class, musicName);
     }
 }

@@ -23,7 +23,7 @@ public class MusicService {
     }
 
     @Transactional
-    public void updateMusic(Long musicId, Time musicStart, Time musicEnd, Integer musicReqeat) {
+    public void updateMusic(Long musicId, String musicStart, String musicEnd, Integer musicReqeat) {
         Music music = musicRepository.findOne(musicId);
         music.setMusicStart(musicStart);
         music.setMusicEnd(musicEnd);
@@ -36,6 +36,14 @@ public class MusicService {
 
     public Music findOne(Long musicId) {
         return musicRepository.findOne(musicId);
+    }
+    public Music findOne2(String musicName) {
+        return musicRepository.findOne2(musicName);
+    }
+
+
+    public List<Music> findMusicName(String musicName) {
+        return musicRepository.findByMusicName(musicName);
     }
 
 }

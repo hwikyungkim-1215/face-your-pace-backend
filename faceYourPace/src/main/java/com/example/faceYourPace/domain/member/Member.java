@@ -34,6 +34,10 @@ public class Member {
     private String userHeight; // 키
     private String userWeight; // 몸무게
 
+    private String stride; // 보폭
+    private String target_pace; // 타겟 space
+    private String workout_level; // 운동강도(타겟 space를 모를때 기능에서 찾아줌, [저, 중, 고강도 선택]
+
     private LocalDateTime createDate;
 
 
