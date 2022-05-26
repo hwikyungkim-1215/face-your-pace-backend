@@ -49,13 +49,18 @@ public class PlayListController {
     }
 
  */
+
+    /* 이거 해결하기!
     @PostMapping("/api/music/playlist/add")
     public String playList(@RequestParam("userId") Long memberId,
                            @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
 
+        memberId = memberService.findUserId(memberId);
         playListService.playList(memberId, musicId);
         return "true";
     }
+
+     */
 
     @PostMapping("/api/music/playlist/add2")
     public String playListAdd(@RequestParam("userId") String userId,

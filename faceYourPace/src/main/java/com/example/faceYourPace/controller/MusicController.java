@@ -1,12 +1,14 @@
 package com.example.faceYourPace.controller;
 
+import com.example.faceYourPace.cmd.DownloadPython;
+import com.example.faceYourPace.cmd.MusicFunctionPython;
 import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.music.Music;
 import com.example.faceYourPace.domain.music.MusicForm;
+import com.example.faceYourPace.repository.MemberRepository;
 import com.example.faceYourPace.repository.MusicRepository;
 import com.example.faceYourPace.service.MusicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MusicController {
 
-    private final MusicService musicService;
-    private final MusicRepository musicRepository;
+    public final MusicService musicService;
+    public final MusicRepository musicRepository;
+    public final MemberRepository memberRepository;
+    public Member member;
+
+    String audio_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result/";
+    String save_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result2/";
 
     @GetMapping("/api/music/add")
     public String createForm(Model model) {
@@ -37,8 +44,14 @@ public class MusicController {
         music.setCreateDate(LocalDateTime.now());
         music.setMusicImg_url(form.getMusicImg_url());
         musicService.saveMusic(music);
+        // 음악 다운
+        DownloadPython.create(music.getMusicImg_url());
+        // 음악 변환 후 저장
+        MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), member.getTarget_pace());
         return "true";
     }
+
+
 /*
     @GetMapping("/api/music/list")
     public String list(Model model) {

@@ -1,5 +1,6 @@
 package com.example.faceYourPace.web.member;
 
+import com.example.faceYourPace.cmd.RecommandBpmPython;
 import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.member.MemberService;
 import com.example.faceYourPace.domain.music.Music;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -93,4 +95,29 @@ public class MemberController {
         memberService.update(memberId, member);
         return "회원정보 update";
     }
+
+    @GetMapping("/api/recommand/bpm")
+    public String recommandBpm(@PathVariable("memberId") Long memberId, Model model) throws IOException, InterruptedException {
+        Member member = (Member) memberService.findOne(memberId);
+
+        MemberForm form = new MemberForm();
+        form.setUserName(member.getUserName());
+        form.setUserEmail(member.getUserEmail());
+        form.setUserAge(member.getUserAge());
+        form.setUserHeight(member.getUserHeight());
+        form.setUserWeight(member.getUserWeight());
+        form.setStride(member.getStride());
+        form.setTarget_pace(member.getTarget_pace());
+        form.setWorkout_level(member.getWorkout_level());
+
+        model.addAttribute("form", form);
+
+        // bpm 추천
+        String bpm = RecommandBpmPython.create(member.getUserHeight(), member.getUserAge(), member.getStride(), member.getTarget_pace());
+
+        System.out.println("bpm:" + bpm);
+        return bpm;
+    }
+
+
 }

@@ -27,6 +27,8 @@ public class Music {
 
     private String musicImg_url; // 음악 사진
 
+    //target_bpm
+
     private LocalDateTime createDate;
 
 }
