@@ -24,8 +24,8 @@ public class MusicController {
     public final MemberRepository memberRepository;
     public Member member;
 
-    String audio_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result/";
-    String save_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result2/";
+    String audio_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result/"; // 원본 음악 저장된 위치(의찬님 이거 바꿔주세요!)
+    String save_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result2/"; // 변환된 음원 저장할 위치(의찬님 이거 바꿔주세요!)
 
     @GetMapping("/api/music/add")
     public String createForm(Model model) {

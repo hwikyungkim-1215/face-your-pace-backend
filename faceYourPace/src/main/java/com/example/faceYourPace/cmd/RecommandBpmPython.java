@@ -26,15 +26,6 @@ public class RecommandBpmPython {
         System.out.println("start:" + stride);
         command[5] = target_pace;
         System.out.println("end:" + target_pace);
-        //command[3] = "20195542";
-        //command[4] = "'"+instaUrl+"'";
-        //System.out.println(command[4]);
-        //command[4] = "'https://www.instagram.com/p/CdUwjoApaUR/?utm_source=ig_web_copy_link'";
-        //command[0] = "python3";
-        //command[1] = "/Users/chaehuiseon/chs_documents/data_test/test.py";
-        //command[2] = "3";
-        //command[3] = "4";
-        //command[4] = "1";
         System.out.println(command.toString());
         try {
             execPython(command);

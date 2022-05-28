@@ -13,8 +13,7 @@ public class DownloadPython extends Thread{
         System.out.println("Python Call");
         String[] command = new String[3];
         command[0] = "python3";
-        //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        command[1] = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/download/download_mp3.py";
+        command[1] = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/download/download_mp3.py"; // 파이썬 파일 위치(의찬님 이거 바꿔주세요!)
         command[2] = "'"+musicImg_url+"'"; // 다운
         System.out.println(musicImg_url);
         System.out.println(command[2]);
