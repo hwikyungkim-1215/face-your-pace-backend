@@ -28,7 +28,7 @@ public class PlayListController {
 
     private final PlayListRepository playListRepository;
 
-    @GetMapping("/api/music/playlist/add2")
+    @GetMapping("/api/music/playlist/add")
     public String createForm(Model model) {
 
         List<Member> members = memberService.findMembers();
@@ -39,40 +39,43 @@ public class PlayListController {
 
         return "플레이리스트 form";
     }
-/*
-    @PostMapping("/api/music/playlist/add")
-    public String playListAdd(@RequestParam("userId") String userId,
-                        @RequestParam("musicName") String musicName) { // 플레이리스트 추가
 
-        playListService.playList(userId, musicName);
-        return "true";
-    }
 
- */
-
-    /* 이거 해결하기!
-    @PostMapping("/api/music/playlist/add")
+    //@PostMapping("/api/music/playlist/add")
     public String playList(@RequestParam("userId") Long memberId,
                            @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
 
-        memberId = memberService.findUserId(memberId);
+
         playListService.playList(memberId, musicId);
         return "true";
     }
 
-     */
 
-    @PostMapping("/api/music/playlist/add2")
-    public String playListAdd(@RequestParam("userId") String userId,
-                           @RequestParam(value = "musicName",required = false) String musicName) { // 플레이리스트 추가
+
+    @PostMapping("/api/music/playlist/add")
+    public String playListAdd2(@RequestParam("userId") String userId,
+                              @RequestParam("musicName") String musicName) { // 플레이리스트 추가
+
+        List<Member> members = memberService.findUserId(userId);
+        List<Music> musics = musicService.findMusicName(musicName);
+
+        for (Member member : members) {
+            for (Music music : musics){
+                if (member.getUserId().equals(userId) && (music.getMusicName().equals(musicName)))  {
+
+                    //Long memberId = member.getId();
+                    playListService.playList(member.getId(), music.getId());
+                    //return member.getId();
+                }
+            }
+        }
 
         System.out.println("userId:" + userId);
         System.out.println("musicName:"+ musicName);
 
-        playListService.playListAdd(userId, musicName);
+        //playListService.playList(memberId, musicName);
         return "플레이리스트 추가";
     }
-
 /*
     //테스트 입니다.
     @RequestMapping(value="/api/music/playlist/add", method= {RequestMethod.POST})

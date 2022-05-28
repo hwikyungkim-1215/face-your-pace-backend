@@ -36,43 +36,47 @@ public class PlayListService {
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
         Music music = musicRepository.findOne(musicId);
-        //Member member = memberRepository.findOne2(userId);
-        //Music music = musicRepository.findOne2(musicName);
-        //주문상품 생성
+
+        //음악 생성
         PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);
 
-        //주문 생성
+        //플레이리스트 생성
         PlayList playList = PlayList.createPlayList(member, playListMusic);
 
-        //주문 저장
+        //플레이리스트 저장
         playListRepository.save(playList);
 
-        System.out.println("getId" + playList.getId());
+        //System.out.println("getId" + playList.getId());
         return playList.getId();
     }
 
+    /*
     @Transactional
-    public String playListAdd(String userId, String musicName) {
+    public Long playListAdd(String userId, Long musicId) {
 
         //엔티티 조회
-        Member member = memberRepository.findUserId(userId);
-        Music music = musicRepository.findMusicName(musicName);
+       //Member member = memberRepository.findByUserId2(userId);
+        //Music music = musicRepository.findMusicName(musicName);
         //Member member = memberRepository.findOne2(userId);
-        //Music music = musicRepository.findOne2(musicName);
+
+        Music music = musicRepository.findOne(musicId);
 
         //주문상품 생성
         PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);
 
         //주문 생성
-        PlayList playList = PlayList.createPlayList(member, playListMusic);
+        //PlayList playList = PlayList.createPlayList(member, playListMusic);
 
         //주문 저장
-        playListRepository.save(playList);
+        //playListRepository.save(playList);
 
-        //return playList.getId();
-        return "service ?";
+
+       // return playList.getId();
+
     }
 
+
+     */
 
 
     /**

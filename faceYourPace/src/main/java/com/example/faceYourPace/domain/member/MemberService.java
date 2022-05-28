@@ -48,6 +48,8 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
+
+
     /**
      * 회원 수정
      */

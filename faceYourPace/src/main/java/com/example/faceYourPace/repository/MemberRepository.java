@@ -3,6 +3,7 @@ package com.example.faceYourPace.repository;
 import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.music.Music;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class MemberRepository {
 
     private final EntityManager em;
+    private Member member;
 
     public void save(Member member) {
         em.persist(member);
@@ -24,21 +26,20 @@ public class MemberRepository {
         return em.find(Member.class, id);
     }
 
-    public Member findUserId(String userId) {
-        return em.find(Member.class, userId);
-    }
 
     public List<Member> findAll() {
         return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
-
     public List<Member> findByUserId(String userId) {
         return em.createQuery("select m from Member m where m.userId = :userId", Member.class)
                 .setParameter("userId", userId)
                 .getResultList();
     }
+
+
+
 
     /*
     Member member = em.createQuery(
