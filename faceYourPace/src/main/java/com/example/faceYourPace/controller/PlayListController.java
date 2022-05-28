@@ -74,7 +74,7 @@ public class PlayListController {
         System.out.println("musicName:"+ musicName);
 
         //playListService.playList(memberId, musicName);
-        return "플레이리스트 추가";
+        return "true";
     }
 /*
     //테스트 입니다.
