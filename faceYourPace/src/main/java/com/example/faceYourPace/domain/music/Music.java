@@ -26,6 +26,7 @@ public class Music {
     private Integer musicRepeat; // 음악 반복 횟수
 
     private String musicImg_url; // 음악 사진
+    private String music_url; // 음악 사진
 
     //target_bpm
 

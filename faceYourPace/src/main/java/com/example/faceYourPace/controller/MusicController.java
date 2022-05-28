@@ -33,8 +33,25 @@ public class MusicController {
         return "music 추가 form";
     }
 
-    @PostMapping("/api/music/add")
-    public String create(MusicForm form) { // music 추가
+    @PostMapping("/api/music/add") // 메인 홈에서 다운
+    public String create(@RequestParam("music_url") String music_url, MusicForm form) { // music 추가
+
+        Music music = new Music();
+        music.setMusic_url(form.getMusic_url());
+        musicService.saveMusic(music);
+        System.out.println("음악 테이블에 저장 완료");
+
+        // 음악 다운
+        System.out.println(music_url);
+        DownloadPython.create(music_url);
+
+        System.out.println("downloadPython 완료");
+
+        return "true";
+    }
+
+    @PostMapping("/api/music/config")
+    public String createConfig(MusicForm form) { // music 추가 // 수정하기(update로 구현하기)
 
         Music music = new Music();
         music.setMusicName(form.getMusicName());
@@ -42,7 +59,6 @@ public class MusicController {
         music.setMusicEnd(form.getMusicEnd());
         music.setMusicRepeat(form.getMusicRepeat());
         music.setCreateDate(LocalDateTime.now());
-        music.setMusicImg_url(form.getMusicImg_url());
         musicService.saveMusic(music);
         // 음악 다운
         System.out.println(music.getMusicImg_url());
@@ -55,6 +71,7 @@ public class MusicController {
         System.out.println("musicFunc 완료");
         return "true";
     }
+
 
 
 /*

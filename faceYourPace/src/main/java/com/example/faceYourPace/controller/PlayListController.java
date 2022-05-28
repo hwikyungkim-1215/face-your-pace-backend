@@ -40,7 +40,6 @@ public class PlayListController {
         return "플레이리스트 form";
     }
 
-
     //@PostMapping("/api/music/playlist/add")
     public String playList(@RequestParam("userId") Long memberId,
                            @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
@@ -49,7 +48,6 @@ public class PlayListController {
         playListService.playList2(memberId, musicId);
         return "true";
     }
-
 
 
     @PostMapping("/api/playList/music/add")
