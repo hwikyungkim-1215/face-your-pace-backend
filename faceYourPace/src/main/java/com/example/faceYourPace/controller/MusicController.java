@@ -45,9 +45,14 @@ public class MusicController {
         music.setMusicImg_url(form.getMusicImg_url());
         musicService.saveMusic(music);
         // 음악 다운
+        System.out.println(music.getMusicImg_url());
         DownloadPython.create(music.getMusicImg_url());
+
+        System.out.println("downloadPython 완료");
+
         // 음악 변환 후 저장
         MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), member.getTarget_pace());
+        System.out.println("musicFunc 완료");
         return "true";
     }
 
