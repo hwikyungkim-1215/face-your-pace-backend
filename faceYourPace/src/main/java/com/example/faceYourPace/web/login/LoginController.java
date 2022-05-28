@@ -20,12 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
-    @PostMapping("/test")
-    @ResponseBody
-    public String testapi(String s){
-        System.out.println(s);
-        return "성공했습니당~!!!!";
-    }
+
 
     private final LoginService loginService;
     private final SessionManager sessionManager;
@@ -61,7 +56,8 @@ public class LoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
         //return "redirect:" + redirectURL;
-        return "true";
+        System.out.println(loginMember.getId().toString());
+        return loginMember.getId().toString(); // pk 값 보내기
 
     }
 
