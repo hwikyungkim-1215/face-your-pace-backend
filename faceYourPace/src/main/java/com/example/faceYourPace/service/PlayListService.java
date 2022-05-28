@@ -31,7 +31,26 @@ public class PlayListService {
      * 플레이리스트 추가
      */
     @Transactional
-    public Long playList(Long memberId, Long musicId) {
+    public Long playList(Long memberId, String name) {
+
+        //엔티티 조회
+        Member member = memberRepository.findOne(memberId);
+
+        //음악 생성
+        //PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);
+
+        //플레이리스트 생성
+        PlayList playList = PlayList.createPlayListNull(member, name);
+
+        //플레이리스트 저장
+        playListRepository.save(playList);
+
+        //System.out.println("getId" + playList.getId());
+        return playList.getId();
+    }
+
+    @Transactional
+    public Long playList2(Long memberId, Long musicId) {
 
         //엔티티 조회
         Member member = memberRepository.findOne(memberId);
@@ -50,33 +69,7 @@ public class PlayListService {
         return playList.getId();
     }
 
-    /*
-    @Transactional
-    public Long playListAdd(String userId, Long musicId) {
 
-        //엔티티 조회
-       //Member member = memberRepository.findByUserId2(userId);
-        //Music music = musicRepository.findMusicName(musicName);
-        //Member member = memberRepository.findOne2(userId);
-
-        Music music = musicRepository.findOne(musicId);
-
-        //주문상품 생성
-        PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);
-
-        //주문 생성
-        //PlayList playList = PlayList.createPlayList(member, playListMusic);
-
-        //주문 저장
-        //playListRepository.save(playList);
-
-
-       // return playList.getId();
-
-    }
-
-
-     */
 
 
     /**

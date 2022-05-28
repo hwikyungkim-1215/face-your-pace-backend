@@ -46,14 +46,14 @@ public class PlayListController {
                            @RequestParam("musicId") Long musicId) { // 플레이리스트 추가
 
 
-        playListService.playList(memberId, musicId);
+        playListService.playList2(memberId, musicId);
         return "true";
     }
 
 
 
-    @PostMapping("/api/music/playlist/add")
-    public String playListAdd2(@RequestParam("userId") String userId,
+    @PostMapping("/api/playList/music/add")
+    public String playListMusicAdd(@RequestParam("userId") String userId,
                               @RequestParam("musicName") String musicName) { // 플레이리스트 추가
 
         List<Member> members = memberService.findUserId(userId);
@@ -64,7 +64,7 @@ public class PlayListController {
                 if (member.getUserId().equals(userId) && (music.getMusicName().equals(musicName)))  {
 
                     //Long memberId = member.getId();
-                    playListService.playList(member.getId(), music.getId());
+                    playListService.playList2(member.getId(), music.getId());
                     //return member.getId();
                 }
             }
@@ -72,6 +72,26 @@ public class PlayListController {
 
         System.out.println("userId:" + userId);
         System.out.println("musicName:"+ musicName);
+
+        //playListService.playList(memberId, musicName);
+        return "true";
+    }
+
+    @PostMapping("/api/music/playlist/add")
+    public String playListAdd2(@RequestParam("userId") String userId,
+                               @RequestParam("name") String name) { // 플레이리스트 추가(userId, 플레이리스트이름)
+
+        List<Member> members = memberService.findUserId(userId);
+
+        for (Member member : members) {
+                if (member.getUserId().equals(userId))  {
+
+                    playListService.playList(member.getId(), name);
+                    //return member.getId();
+                }
+        }
+
+        System.out.println("userId:" + userId);
 
         //playListService.playList(memberId, musicName);
         return "true";

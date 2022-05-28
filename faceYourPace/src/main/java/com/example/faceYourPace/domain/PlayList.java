@@ -28,6 +28,8 @@ public class PlayList { //playList
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String name; // 플레이리스트 이름
+
     @JsonIgnore
     @OneToMany(mappedBy = "playList", cascade = CascadeType.ALL)
     private List<PlayListMusic> playListMusics = new ArrayList<>();
@@ -54,6 +56,14 @@ public class PlayList { //playList
         for (PlayListMusic playListMusic : playListMusics) {
             playList.addPlayListMusic(playListMusic);
         }
+        playList.setPlayListDate(LocalDateTime.now());
+        return playList;
+    }
+
+    public static PlayList createPlayListNull(Member member, String name) {
+        PlayList playList = new PlayList();
+        playList.setMember(member);
+        playList.setName(name);
         playList.setPlayListDate(LocalDateTime.now());
         return playList;
     }
