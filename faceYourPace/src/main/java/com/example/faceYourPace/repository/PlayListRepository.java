@@ -86,8 +86,8 @@ public class PlayListRepository {
     }
 
     public List<PlayList> findById(Long id) {
-        return em.createQuery("select m from Member m where m.id = :memberId", PlayList.class)
-                .setParameter("memberId", id)
+        return em.createQuery("select m from PlayList m where m.member.id = :id", PlayList.class)
+                .setParameter("id", id)
                 .getResultList();
     }
 }

@@ -23,9 +23,9 @@ public class RecommandBpmPython {
         command[3] = userAge;
         System.out.println("save_path:" + userAge);
         command[4] = stride;
-        System.out.println("start:" + stride);
+        System.out.println("stride:" + stride);
         command[5] = target_pace;
-        System.out.println("end:" + target_pace);
+        System.out.println("target:" + target_pace);
         System.out.println(command.toString());
         try {
             execPython(command);

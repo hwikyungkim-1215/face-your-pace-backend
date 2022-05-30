@@ -21,10 +21,11 @@ import static javax.persistence.FetchType.*;
 public class PlayList { //playList
 
     @Id @GeneratedValue
+    @JsonIgnore
     @Column(name = "playList_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 

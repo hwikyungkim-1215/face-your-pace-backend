@@ -121,9 +121,10 @@ public class PlayListController {
 
  */
 
-    @GetMapping("/api/mypage/playlist/{memberId}")
-    List<PlayList> getUserIdAllDate(@PathVariable("memberId") Long memberId) { // userId의 플레이리스트 목록
-        return playListRepository.findById(memberId);
+    @GetMapping("/api/mypage/playlist/{id}")
+    List<PlayList> getUserIdAllDate(@PathVariable("id") Long id) { // userId의 플레이리스트 목록
+        System.out.println(playListRepository.findById(id));
+        return playListRepository.findById(id);
     }
 
     @GetMapping("/api/play/list")
