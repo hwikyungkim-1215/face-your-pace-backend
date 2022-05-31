@@ -82,7 +82,7 @@ public class MusicController {
     @PostMapping("/api/music/{musicId}/edit") // config 페이지 연동
     public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {
 
-        musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat());
+        musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat(), form.getTarget_bpm());
         System.out.println("음악 설정 update");
         return "true";
     }

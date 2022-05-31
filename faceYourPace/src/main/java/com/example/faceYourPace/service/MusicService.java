@@ -23,11 +23,12 @@ public class MusicService {
     }
 
     @Transactional
-    public void updateMusic(Long musicId, String musicStart, String musicEnd, Integer musicReqeat) {
+    public void updateMusic(Long musicId, String musicStart, String musicEnd, String musicReqeat, String target_bpm) {
         Music music = musicRepository.findOne(musicId);
         music.setMusicStart(musicStart);
         music.setMusicEnd(musicEnd);
         music.setMusicRepeat(musicReqeat);
+        music.setTarget_bpm(target_bpm);
     }
 
     public List<Music> findMusics() {
