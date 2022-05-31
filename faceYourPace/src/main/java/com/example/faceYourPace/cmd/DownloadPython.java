@@ -39,6 +39,7 @@ public class DownloadPython extends Thread{
         int result = executor.execute(commandLine);
         System.out.println("result: " + result);
         System.out.println("output: " + outputStream.toString());
+        System.out.println("mp3 파일 다운 완료");
 
     }
 

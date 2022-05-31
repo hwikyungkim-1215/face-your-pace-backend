@@ -51,9 +51,8 @@ public class PlayList { //playList
 
 
     //==생성 메서드==//
-    public static PlayList createPlayList(Member member, PlayListMusic... playListMusics) {
-        PlayList playList = new PlayList();
-        playList.setMember(member);
+    public static PlayList createPlayList(PlayList playList, PlayListMusic... playListMusics) {
+        //PlayList playList = new PlayList();
         for (PlayListMusic playListMusic : playListMusics) {
             playList.addPlayListMusic(playListMusic);
         }

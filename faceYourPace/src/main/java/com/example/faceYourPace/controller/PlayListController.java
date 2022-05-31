@@ -51,26 +51,28 @@ public class PlayListController {
 
 
     @PostMapping("/api/playList/music/add")
-    public String playListMusicAdd(@RequestParam("userId") String userId,
-                              @RequestParam("musicName") String musicName) { // 플레이리스트 추가
+    public String playListMusicAdd(@RequestParam("playListId") String playListId,
+                              @RequestParam("musicId") String musicId) { // 플레이리스트에 음악추가
 
-        List<Member> members = memberService.findUserId(userId);
-        List<Music> musics = musicService.findMusicName(musicName);
+        Long playListId2 = Long.parseLong(playListId);
+        Long musicId2 = Long.parseLong(musicId);
 
-        for (Member member : members) {
+        //List<Member> members = memberService.findUserId(userId);
+        List<PlayList> playLists = playListService.findById(playListId2);
+        List<Music> musics = musicService.findById(musicId2);
+/*
+        for (PlayList playList : playLists) {
             for (Music music : musics){
-                if (member.getUserId().equals(userId) && (music.getMusicName().equals(musicName)))  {
-
+                if (playList.getId().equals(playListId2) && music.getId().equals(musicId2)) {
                     //Long memberId = member.getId();
-                    playListService.playList2(member.getId(), music.getId());
+                    playListService.playList2(playList.getId(), music.getId());
                     //return member.getId();
                 }
             }
         }
 
-        System.out.println("userId:" + userId);
-        System.out.println("musicName:"+ musicName);
-
+ */
+        playListService.playList2(playListId2, musicId2);
         //playListService.playList(memberId, musicName);
         return "true";
     }
@@ -94,32 +96,7 @@ public class PlayListController {
         //playListService.playList(memberId, musicName);
         return "true";
     }
-/*
-    //테스트 입니다.
-    @RequestMapping(value="/api/music/playlist/add", method= {RequestMethod.POST})
-    public String playListAdd(Model model, @RequestParam(value="userId", required = false) String userId,
-                            @RequestParam(value="musicName", required=false) String musicName) throws Exception {
 
-        playListService.playList(userId, musicName);
-        return "true";
-    }
-
-    @GetMapping("/api/mypage/playlist/{userId}")
-    public String playListList(@ModelAttribute("playListSearch") PlayListSearch playListSearch, Model model) {
-        List<PlayList> playLists = playListService.findPlayLists(playListSearch);
-        model.addAttribute("playlists", playLists);
-        // userId의 플레이리스트 목록
-        return "true";
-    }
-
- */
-/*
-    @GetMapping("/api/mypage/playlist/{userId}")
-    List<PlayList> getUserIdAllDate(@PathVariable("userId") String userId) { // userId의 플레이리스트 목록
-        return playListRepository.findByUserId(userId);
-    }
-
- */
 
     @GetMapping("/api/mypage/playlist/{id}")
     List<PlayList> getUserIdAllDate(@PathVariable("id") Long id) { // userId의 플레이리스트 목록

@@ -42,6 +42,12 @@ public class MusicRepository {
                 .getResultList();
     }
 
+    public List<Music> findById(Long id) {
+        return em.createQuery("select m from Music m where m.id = :id", Music.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
     public Music findMusicName(String musicName) {
         return em.find(Music.class, musicName);
     }

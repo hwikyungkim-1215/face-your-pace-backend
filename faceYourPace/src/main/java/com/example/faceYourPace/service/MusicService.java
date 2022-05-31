@@ -46,4 +46,8 @@ public class MusicService {
         return musicRepository.findByMusicName(musicName);
     }
 
+    public List<Music> findById(Long musicId) {
+        return musicRepository.findById(musicId);
+    }
+
 }

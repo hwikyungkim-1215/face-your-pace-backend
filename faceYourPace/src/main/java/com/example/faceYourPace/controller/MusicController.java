@@ -51,13 +51,14 @@ public class MusicController {
     }
 
     @PostMapping("/api/music/config")
-    public String createConfig(MusicForm form) { // music 추가 // 수정하기(update로 구현하기)
+    public String createConfig(@RequestParam("musicName") String musicName) { // music 추가 // 수정하기(update로 구현하기)
 
-        Music music = new Music();
-        music.setMusicName(form.getMusicName());
-        music.setMusicStart(form.getMusicStart());
-        music.setMusicEnd(form.getMusicEnd());
-        music.setMusicRepeat(form.getMusicRepeat());
+        Music music = musicRepository.findMusicName(musicName);
+        //Music music = new Music();
+        //music.setMusicName(form.getMusicName());
+        //music.setMusicStart(form.getMusicStart());
+        //music.setMusicEnd(form.getMusicEnd());
+        //music.setMusicRepeat(form.getMusicRepeat());
         music.setCreateDate(LocalDateTime.now());
         musicService.saveMusic(music);
         // 음악 다운
@@ -73,22 +74,20 @@ public class MusicController {
     }
 
 
-
-/*
-    @GetMapping("/api/music/list")
-    public String list(Model model) {
-        List<Music> items = musicService.findMusics();
-        model.addAttribute("items", items);
-        return "음악리스트 출력";
-    }
-
- */
-    @GetMapping("/api/music/list")
+    @GetMapping("/api/music/list") // music table 전체 출력
     List<Music> getAll() { // 음악리스트 출력
         return musicRepository.findAll();
     }
 
-    @GetMapping("api/music/{musicId}/edit")
+    @PostMapping("/api/music/{musicId}/edit") // config 페이지 연동
+    public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {
+
+        musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat());
+        System.out.println("음악 설정 update");
+        return "true";
+    }
+
+    @GetMapping("api/music/edit")
     public String updateMusicForm(@PathVariable("musicName") Long musicId, Model model) {
         Music music = (Music) musicService.findOne(musicId);
 
@@ -104,12 +103,6 @@ public class MusicController {
         return "음악 설정 update";
     }
 
-    @PostMapping("api/music/{musicId}/edit")
-    public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {
-
-        musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat());
-        return "음악 설정 update";
-    }
 }
 
 

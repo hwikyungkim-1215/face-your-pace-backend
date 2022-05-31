@@ -90,5 +90,11 @@ public class PlayListRepository {
                 .setParameter("id", id)
                 .getResultList();
     }
+
+    public List<PlayList> findByName(String name) {
+        return em.createQuery("select m from PlayList m where m.name = :name", PlayList.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
 }
 

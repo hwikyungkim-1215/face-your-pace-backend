@@ -50,17 +50,19 @@ public class PlayListService {
     }
 
     @Transactional
-    public Long playList2(Long memberId, Long musicId) {
+    public Long playList2(Long playListId, Long musicId) {
 
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        //Member member = memberRepository.findOne(memberId);
+        PlayList playList1 = playListRepository.findOne(playListId);
         Music music = musicRepository.findOne(musicId);
 
         //음악 생성
         PlayListMusic playListMusic = PlayListMusic.createPlayListMusic(music);
 
+
         //플레이리스트 생성
-        PlayList playList = PlayList.createPlayList(member, playListMusic);
+        PlayList playList = PlayList.createPlayList(playList1, playListMusic);
 
         //플레이리스트 저장
         playListRepository.save(playList);
@@ -70,6 +72,10 @@ public class PlayListService {
     }
 
 
+    public List<PlayList> findById(Long playListId) {
+
+        return playListRepository.findById(playListId);
+    }
 
 
     /**
