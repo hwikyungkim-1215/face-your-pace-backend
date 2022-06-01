@@ -28,6 +28,7 @@ public class Music {
     private String musicImg_url; // 음악 사진
     private String music_url; // 음악 사진
     private String length; // 음악 전체 길이
+    private String title; // 음악 제목
 
     private String target_bpm; //target_bpm
 

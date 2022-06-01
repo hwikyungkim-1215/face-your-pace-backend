@@ -1,6 +1,7 @@
 package com.example.faceYourPace.repository;
 
 import com.example.faceYourPace.domain.PlayList;
+import com.example.faceYourPace.domain.PlayListMusic;
 import com.example.faceYourPace.domain.member.Member;
 import com.example.faceYourPace.domain.music.Music;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,11 @@ public class PlayListRepository {
 
     public List<PlayList> findAll() {
         return em.createQuery("select i from PlayList i", PlayList.class)
+                .getResultList();
+    }
+
+    public List<PlayListMusic> findAll2() {
+        return em.createQuery("select i from PlayListMusic i", PlayListMusic.class)
                 .getResultList();
     }
 

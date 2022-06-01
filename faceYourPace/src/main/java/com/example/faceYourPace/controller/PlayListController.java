@@ -51,28 +51,23 @@ public class PlayListController {
 
 
     @PostMapping("/api/playList/music/add")
-    public String playListMusicAdd(@RequestParam("playListId") String playListId,
+    public String playListMusicAdd(@RequestParam("name") String name,
                               @RequestParam("musicId") String musicId) { // 플레이리스트에 음악추가
 
-        Long playListId2 = Long.parseLong(playListId);
+        //Long playListId2 = Long.parseLong(playListId);
         Long musicId2 = Long.parseLong(musicId);
 
         //List<Member> members = memberService.findUserId(userId);
-        List<PlayList> playLists = playListService.findById(playListId2);
-        List<Music> musics = musicService.findById(musicId2);
-/*
-        for (PlayList playList : playLists) {
-            for (Music music : musics){
-                if (playList.getId().equals(playListId2) && music.getId().equals(musicId2)) {
-                    //Long memberId = member.getId();
-                    playListService.playList2(playList.getId(), music.getId());
-                    //return member.getId();
-                }
-            }
-        }
+        List<PlayList> playLists = playListService.findName(name);
+        //List<Music> musics = musicService.findById(musicId2);
 
- */
-        playListService.playList2(playListId2, musicId2);
+        for (PlayList playList : playLists) {
+            if (playList.getName().equals(name)) {
+                playListService.playList2(playList.getId(), musicId2);
+            }
+
+        }
+        //playListService.playList2(playListId2, musicId2);
         //playListService.playList(memberId, musicName);
         return "true";
     }
@@ -105,8 +100,21 @@ public class PlayListController {
     }
 
     @GetMapping("/api/play/list")
-    List<PlayList> getAll() { // 플레이리스트 출력 -> 왜 안됌?
+    List<PlayList> getAll() { // 플레이리스트 출력
         return playListRepository.findAll();
+    }
+
+    @GetMapping("/api/play/list2")
+    List<PlayList> getAll2(PlayListSearch playListSearch) { // 플레이리스트 출력
+        return playListRepository.findAllByCriteria(playListSearch);
+    }
+
+    @GetMapping("/api/mypage/playlist")
+    public String playListList(@ModelAttribute("playListSearch") PlayListSearch playListSearch, Model model) {
+        List<PlayList> playLists = playListService.findPlayLists(playListSearch);
+        model.addAttribute("playlists", playLists);
+        // userId의 플레이리스트 목록
+        return "true";
     }
 
 

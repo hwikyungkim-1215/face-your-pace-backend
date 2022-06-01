@@ -77,6 +77,11 @@ public class PlayListService {
         return playListRepository.findById(playListId);
     }
 
+    public List<PlayList> findName(String name) {
+        return playListRepository.findByName(name);
+    }
+
+
 
     /**
      * 플레이리스트 삭제

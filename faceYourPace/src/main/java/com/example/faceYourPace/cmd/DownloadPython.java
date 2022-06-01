@@ -9,24 +9,27 @@ import java.io.IOException;
 
 public class DownloadPython extends Thread{
 
-    public static void create(String musicImg_url){
+    public static String create(String music_url){
         System.out.println("Python Call");
-        String[] command = new String[3];
+        String[] command = new String[4];
         command[0] = "python3";
-        command[1] = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/download/download_mp3.py"; // 파이썬 파일 위치(의찬님 이거 바꿔주세요!)
-        command[2] = "'"+musicImg_url+"'"; // 다운
-        System.out.println(musicImg_url);
+        command[1] = "'/home/ubuntu/face-your-pace-function/fyp_download/fyp_download.py'"; // 파이썬 파일 위치
+        command[2] = "'"+music_url+"'"; // 음악 링크
+        command[3] = "'/home/ubuntu/face-your-pace-function/fyp_download/result'"; // 파일 저장 위치
+
+        System.out.println(music_url);
         System.out.println(command[2]);
         System.out.println(command.toString());
 
         try {
-            execPython(command);
+            return execPython(command);
         } catch (Exception e) {
             e.printStackTrace();
+            return "error";
         }
     }
 
-    public static void execPython(String[] command) throws IOException, InterruptedException {
+    public static String execPython(String[] command) throws IOException, InterruptedException {
         CommandLine commandLine = CommandLine.parse(command[0]);
         for (int i = 1, n = command.length; i < n; i++) {
             commandLine.addArgument(command[i]);
@@ -41,72 +44,9 @@ public class DownloadPython extends Thread{
         System.out.println("output: " + outputStream.toString());
         System.out.println("mp3 파일 다운 완료");
 
+        return outputStream.toString();
+
     }
-
-
-
-
 }
 
-/*
-//@Controller
-public class PythonTest {
-
-    public static Music music;
-    public static Member member;
-
-    //@GetMapping("/python/call")
-    public static void main(String[] args) {
-        //System.out.println("musicStart: " + music.getMusicStart());
-        //System.out.println("musicEnd: " + music.getMusicEnd());
-        //System.out.println("musicRepeat: " + music.getMusicRepeat());
-        
-        System.out.println("Python Call");
-        String[] command = new String[3];
-        command[0] = "python";
-        //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        //command[1] = "/Users/ykkim/workspace/java-call-python/src/main/resources/test.py";
-        command[1] = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/download/download_mp3.py";
-        //command[2] = member.getUserAge();
-        //System.out.println("url" + music.getMusicImg_url());
-        //command[2] = music.getMusicImg_url();
-        command[2] = "'https://soundcloud.com/ferret-lie/only-your-stars-trickstar-ver','/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result'";
-        System.out.println(command[2]);
-        //command[3] = "170";
-        //command[3] = "170";
-        //command[4] = "360"; // target_pace
-        //command[5] = "110"; // stride
-
-
-        //int irepeat = music.getMusicRepeat();
-        //String repeat = Integer.toString(irepeat);
-        //command[4] = repeat;
-
-        try {
-            execPython(command);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void execPython(String[] command) throws IOException, InterruptedException {
-        CommandLine commandLine = CommandLine.parse(command[0]);
-        for (int i = 1, n = command.length; i < n; i++) {
-            commandLine.addArgument(command[i]);
-        }
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
-        DefaultExecutor executor = new DefaultExecutor();
-        executor.setStreamHandler(pumpStreamHandler);
-        //int result = executor.execute(commandLine);
-        //System.out.println("result: " + result);
-        System.out.println("output: \n" + outputStream.toString());
-
-    }
-
-}
-
-
- */
 

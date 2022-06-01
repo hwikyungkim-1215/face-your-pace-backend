@@ -24,9 +24,6 @@ public class MusicController {
     public final MemberRepository memberRepository;
     public Member member;
 
-    String audio_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result/"; // 원본 음악 저장된 위치(의찬님 이거 바꿔주세요!)
-    String save_path = "/Users/hwikyung/Desktop/hwi/computer/4/face-your-pace-function-main/result2/"; // 변환된 음원 저장할 위치(의찬님 이거 바꿔주세요!)
-
     @GetMapping("/api/music/add")
     public String createForm(Model model) {
         model.addAttribute("form", new MusicForm());
@@ -38,19 +35,29 @@ public class MusicController {
 
         Music music = new Music();
         music.setMusic_url(form.getMusic_url());
-        musicService.saveMusic(music);
-        System.out.println("음악 테이블에 저장 완료");
 
         // 음악 다운
         System.out.println(music_url);
-        DownloadPython.create(music_url);
+        String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
 
         System.out.println("downloadPython 완료");
+
+        String[] strArr = r.split("$");
+        String title = strArr[0];
+        String length = strArr[1];
+        String img_url = strArr[2];
+
+        music.setMusicImg_url(img_url);
+        music.setLength(length);
+        music.setTitle(title);
+
+        musicService.saveMusic(music);
+        System.out.println("음악 테이블에 저장 완료");
 
         return "true";
     }
 
-    @PostMapping("/api/music/config")
+    @PostMapping("/api/music/config") // 안씀
     public String createConfig(@RequestParam("musicName") String musicName) { // music 추가 // 수정하기(update로 구현하기)
 
         Music music = musicRepository.findMusicName(musicName);
@@ -61,15 +68,10 @@ public class MusicController {
         //music.setMusicRepeat(form.getMusicRepeat());
         music.setCreateDate(LocalDateTime.now());
         musicService.saveMusic(music);
-        // 음악 다운
-        System.out.println(music.getMusicImg_url());
-        DownloadPython.create(music.getMusicImg_url());
-
-        System.out.println("downloadPython 완료");
 
         // 음악 변환 후 저장
-        MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), member.getTarget_pace());
-        System.out.println("musicFunc 완료");
+        //MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), bpm);
+        System.out.println("music 설정값 적용 완료");
         return "true";
     }
 
@@ -79,15 +81,32 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
+
     @PostMapping("/api/music/{musicId}/edit") // config 페이지 연동
     public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {
 
         musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat(), form.getTarget_bpm());
         System.out.println("음악 설정 update");
+
+        String bpm;
+        if(member.getTarget_pace() == null){ // 타겟 bpm이 없을 경우
+            bpm = "0";
+        }
+        else{
+            bpm = member.getTarget_pace();
+        }
+        Music music = musicRepository.findOne(musicId);
+        // 음악 변환 후 저장
+        String audio_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle() + ".mp3'"; // 원본 음악 저장된 위치
+        String save_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle() + ".wav'"; // 변환된 음원 저장할 위치
+
+        MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), bpm);
+        System.out.println("music 설정값 적용 완료");
+
         return "true";
     }
 
-    @GetMapping("api/music/edit")
+    @GetMapping("api/music/edit") // 안씀
     public String updateMusicForm(@PathVariable("musicName") Long musicId, Model model) {
         Music music = (Music) musicService.findOne(musicId);
 
