@@ -51,8 +51,4 @@ public class MusicService {
         return musicRepository.findById(musicId);
     }
 
-    public List<Music> findByMUserId(String userId) {
-        return musicRepository.findByMUserId(userId);
-    }
-
 }

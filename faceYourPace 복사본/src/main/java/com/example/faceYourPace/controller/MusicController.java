@@ -2,16 +2,12 @@ package com.example.faceYourPace.controller;
 
 import com.example.faceYourPace.cmd.DownloadPython;
 import com.example.faceYourPace.cmd.MusicFunctionPython;
-import com.example.faceYourPace.domain.PlayList;
 import com.example.faceYourPace.domain.member.Member;
-import com.example.faceYourPace.domain.member.MemberService;
 import com.example.faceYourPace.domain.music.Music;
 import com.example.faceYourPace.domain.music.MusicForm;
 import com.example.faceYourPace.repository.MemberRepository;
 import com.example.faceYourPace.repository.MusicRepository;
 import com.example.faceYourPace.service.MusicService;
-import com.example.faceYourPace.service.PlayListService;
-import com.example.faceYourPace.web.login.LoginController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +22,7 @@ public class MusicController {
     public final MusicService musicService;
     public final MusicRepository musicRepository;
     public final MemberRepository memberRepository;
-    private final MemberService memberService;
-    private final PlayListService playListService;
     public Member member;
-    private final LoginController loginController;
 
     @GetMapping("/api/music/add")
     public String createForm(Model model) {
@@ -38,24 +31,18 @@ public class MusicController {
     }
 
     @PostMapping("/api/music/add") // 메인 홈에서 다운
-    public String create(@RequestParam("music_url") String music_url, @RequestParam("userId") String mUserId, MusicForm form) { // music 추가
+    public String create(@RequestParam("music_url") String music_url, MusicForm form) { // music 추가
 
         Music music = new Music();
         music.setMusic_url(form.getMusic_url());
-        music.setMUserId(form.getMUserId());
 
         // 음악 다운
         System.out.println(music_url);
-        //String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
-        String r = "title<>03:48<>http://hwi/abc.png";
+        String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
+
         System.out.println("downloadPython 완료");
 
-        String[] strArr = r.split("<>");
-        System.out.println("r:" + r);
-        System.out.println("arr[0]" + strArr[0]);
-        System.out.println("arr[1]" + strArr[1]);
-        System.out.println("arr[2]" + strArr[2]);
-
+        String[] strArr = r.split("$");
         String title = strArr[0];
         String length = strArr[1];
         String img_url = strArr[2];
@@ -94,34 +81,6 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
-    @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
-    List<Music> getUserMusic(@RequestParam("userId") String userId) { // (해당 userId의) 음악리스트 출력
-
-        return musicRepository.findByMUserId(userId);
-
-    }
-
-    /*
-    @GetMapping("/api/music/list/{userId}/{name}") // 특정 userId의 특정 playlist의 music table 출력
-    List<Music> getUserPlayListMusic(@RequestParam("userId") String userId, @RequestParam("name") String name) { // (해당 userId의) 음악리스트 출력
-
-        List<Music> musics = musicService.findByMUserId(userId);
-        List<PlayList> playLists = playListService.findName(name);
-
-        for (PlayList playList : playLists){
-            for (Music music : musics){
-                if (music.getMUserId().equals(userId) && (playList.getName().equals(name))) {
-                    //playListService.playList(member.getId(), name);
-                    return musicRepository.findByMUserId(userId);
-                }
-            }
-        }
-        //return musicRepository.findByMUserId(userId);
-
-    }
-
-
-     */
 
     @PostMapping("/api/music/{musicId}/edit") // config 페이지 연동
     public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {

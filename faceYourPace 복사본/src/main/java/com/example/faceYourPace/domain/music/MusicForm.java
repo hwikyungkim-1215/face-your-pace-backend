@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class MusicForm {
 
     private Long id;
-    private String mUserId; // 음악 추가한 userId
+
 
     private String musicName; // 음악 이름
     //private String artist; // 가수

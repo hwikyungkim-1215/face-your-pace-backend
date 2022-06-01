@@ -32,7 +32,7 @@ public class LoginController {
 
 
     @PostMapping("/auth/login")
-    public String loginV4(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
+    public String loginV4(@Valid @ModelAttribute com.example.faceYourPace.web.login.LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
 

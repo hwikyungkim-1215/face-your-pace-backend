@@ -41,18 +41,6 @@ public class MusicRepository {
                 .setParameter("musicName", musicName)
                 .getResultList();
     }
-    public List<Music> findByMUserId(String mUserId) {
-        return em.createQuery("select m from Music m where m.mUserId = :mUserId", Music.class)
-                .setParameter("mUserId", mUserId)
-                .getResultList();
-    }
-
-//
-    public List<Music> findByMUserIdPlayList(String mUserId, String name) {
-        return em.createQuery("select m from Music m where m.mUserId = :mUserId", Music.class)
-                .setParameter("mUserId", mUserId)
-                .getResultList();
-    }
 
     public List<Music> findById(Long id) {
         return em.createQuery("select m from Music m where m.id = :id", Music.class)
