@@ -46,8 +46,8 @@ public class MusicController {
 
         // 음악 다운
         System.out.println(music_url);
-        //String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
-        String r = "title<>03:48<>http://hwi/abc.png";
+        String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
+        //String r = "title<>03:48<>http://hwi/abc.png";
         System.out.println("downloadPython 완료");
 
         String[] strArr = r.split("<>");
