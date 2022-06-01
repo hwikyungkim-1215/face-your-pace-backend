@@ -38,12 +38,14 @@ public class MusicController {
     }
 
     @PostMapping("/api/music/add") // 메인 홈에서 다운
-    public String create(@RequestParam("music_url") String music_url, @RequestParam("userId") String mUserId, MusicForm form) { // music 추가
+    public String create(@RequestParam("music_url") String music_url, @RequestParam("userId") String userId, MusicForm form) { // music 추가
 
         Music music = new Music();
         music.setMusic_url(form.getMusic_url());
         music.setMUserId(form.getMUserId());
 
+        System.out.println("userId:" + userId);
+        System.out.println("url:" + music_url);
         // 음악 다운
         System.out.println(music_url);
         String r = DownloadPython.create(music_url); // 음악 다운로드(mp3)
@@ -94,17 +96,18 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
-    @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
+    @GetMapping("/api/music/list/all") // 특정 userId의 music table 출력
     List<Music> getUserMusic(@RequestParam("userId") String userId) { // (해당 userId의) 음악리스트 출력
 
         return musicRepository.findByMUserId(userId);
 
     }
 
-    /*
-    @GetMapping("/api/music/list/{userId}/{name}") // 특정 userId의 특정 playlist의 music table 출력
+
+    @GetMapping("/api/music/list/userId/name") // 특정 userId의 특정 playlist의 music table 출력
     List<Music> getUserPlayListMusic(@RequestParam("userId") String userId, @RequestParam("name") String name) { // (해당 userId의) 음악리스트 출력
 
+        /*
         List<Music> musics = musicService.findByMUserId(userId);
         List<PlayList> playLists = playListService.findName(name);
 
@@ -112,16 +115,19 @@ public class MusicController {
             for (Music music : musics){
                 if (music.getMUserId().equals(userId) && (playList.getName().equals(name))) {
                     //playListService.playList(member.getId(), name);
-                    return musicRepository.findByMUserId(userId);
+                    return musicRepository.findByMUserIdPlayList(userId, name);
                 }
             }
         }
-        //return musicRepository.findByMUserId(userId);
+
+         */
+        return musicRepository.findByMUserIdPlayList(userId, name);
 
     }
 
 
-     */
+
+
 
     @PostMapping("/api/music/{musicId}/edit") // config 페이지 연동
     public String updateMusic(@PathVariable Long musicId, @ModelAttribute("form") MusicForm form) {

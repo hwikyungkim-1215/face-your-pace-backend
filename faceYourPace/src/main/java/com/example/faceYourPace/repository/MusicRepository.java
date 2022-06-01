@@ -41,24 +41,35 @@ public class MusicRepository {
                 .setParameter("musicName", musicName)
                 .getResultList();
     }
-    public List<Music> findByMUserId(String mUserId) {
-        return em.createQuery("select m from Music m where m.mUserId = :mUserId", Music.class)
-                .setParameter("mUserId", mUserId)
+    public List<Music> findByMUserId(String userId) {
+        return em.createQuery("select m from Music m where m.mUserId = :userId", Music.class)
+                //.setParameter("userId", userId)
                 .getResultList();
     }
 
 //
     public List<Music> findByMUserIdPlayList(String mUserId, String name) {
-        return em.createQuery("select m from Music m where m.mUserId = :mUserId", Music.class)
-                .setParameter("mUserId", mUserId)
+        return em.createQuery("select m from Music m" +
+                        " where m.mUserId = ANY(select u.userId From Member u)", Music.class)
+                //.setParameter("mUserId", mUserId)
                 .getResultList();
     }
 
-    public List<Music> findById(Long id) {
-        return em.createQuery("select m from Music m where m.id = :id", Music.class)
-                .setParameter("id", id)
+    /*
+    public List<Music> findById22(String mUserId, String name) {
+        return em.createQuery("select m from Music m" +
+                        " where m.age > ANY(select u.age From User u)", Member.class)
+                .setParameter("mUSerId", mUserId)
                 .getResultList();
     }
+    List<Music> anyQuery = em.createQuery
+                    ("select m from Music m" +
+                            " where m.mUserId = ANY(select u.userId From Member u)", Member.class)
+            .getResultList();
+
+
+
+     */
 
     public Music findMusicName(String musicName) {
         return em.find(Music.class, musicName);
