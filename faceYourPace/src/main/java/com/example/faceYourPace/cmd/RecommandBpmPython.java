@@ -12,7 +12,7 @@ public class RecommandBpmPython {
 // 키 나이 보폭 페이스
     public static String create(String gender, String userAge, String userHeight,String userWeight,  String workout_level, String target_pace, String stride){
         System.out.println("Python Call");
-        String[] command = new String[6];
+        String[] command = new String[9];
         command[0] = "python3";
         //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
         command[1] = "\"/home/ubuntu/face-your-pace-function/fyp_bpmrecommend/fyp_bpmrecommend.py\"";
@@ -23,19 +23,19 @@ public class RecommandBpmPython {
         command[3] = userAge;
         System.out.println("userAge:" + userAge);
 
-        command[2] = userHeight;
+        command[4] = userHeight;
         System.out.println("userHeight:" + userHeight);
 
-        command[3] = userWeight;
+        command[5] = userWeight;
         System.out.println("userWeight:" + userWeight);
 
-        command[5] = workout_level;
+        command[6] = workout_level;
         System.out.println("workout_level:" + workout_level);
 
-        command[5] = target_pace;
+        command[7] = target_pace;
         System.out.println("target_pace:" + target_pace);
 
-        command[4] = stride;
+        command[8] = stride;
         System.out.println("stride:" + stride);
 
 

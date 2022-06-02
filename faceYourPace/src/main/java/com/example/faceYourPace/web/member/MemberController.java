@@ -114,5 +114,5 @@ public class MemberController {
         System.out.println("bpm:" + bpm);
         return bpm;
     }
-    
+
 }
