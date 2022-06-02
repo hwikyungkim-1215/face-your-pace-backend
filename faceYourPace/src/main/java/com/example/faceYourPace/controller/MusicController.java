@@ -72,7 +72,7 @@ public class MusicController {
         musicService.saveMusic(music);
         System.out.println("음악 테이블에 저장 완료");
 
-        String s3T = music.getS3Title() + ".mp3";
+        String s3T = music.getTitle() + ".mp3";
         String s3T2 = s3T.replaceAll(" ", "");
 
         musicService.updateS3Title(music.getId(), s3T2); //s3
@@ -157,8 +157,8 @@ public class MusicController {
  */
         Music music = musicRepository.findOne(musicId);
         // 음악 변환 후 저장
-        String audio_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".mp3'"; // 원본 음악 저장된 위치
-        String save_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".wav'"; // 변환된 음원 저장할 위치
+        String audio_path = "\"/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".mp3\""; // 원본 음악 저장된 위치
+        String save_path = "\"/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".wav\""; // 변환된 음원 저장할 위치
 
         System.out.println("audio" + audio_path);
         System.out.println("save" + save_path);
@@ -169,7 +169,7 @@ public class MusicController {
         System.out.println("bpm" + music.getTarget_bpm());
         System.out.println("bpm_len" + music.getTarget_bpm().length());
 
-        String s3T = music.getS3Title() + ".wav";
+        String s3T = music.getTitle() + ".wav"; //
         String s3T2 = s3T.replaceAll(" ", "");
 
         musicService.updateS3Title(musicId, s3T2);

@@ -15,18 +15,18 @@ public class MusicFunctionPython {
         String[] command = new String[7];
         command[0] = "python3";
         //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        command[1] = "'/home/ubuntu/face-your-pace-function/fyp_musicmodify/fyp_musicmodify.py'";
+        command[1] = "\"/home/ubuntu/face-your-pace-function/fyp_musicmodify/fyp_musicmodify.py\"";
         System.out.println("command[1]:" + command[1]);
         command[2] = audio_path;
         System.out.println("wav_path:" + audio_path);
         //command[2] = "1";
         command[3] = save_path;
         System.out.println("save_path:" + save_path);
-        command[4] = musicStart;
+        command[4] = "\"" + musicStart + "\"";
         System.out.println("start:" + musicStart);
-        command[5] = musicEnd;
+        command[5] = "\"" + musicEnd + "\"";
         System.out.println("end:" + musicEnd);
-        command[6] = target_bpm;
+        command[6] = "\"" + target_bpm + "\"";
         System.out.println("bpm:" + target_bpm);
 
         System.out.println(command.toString());
