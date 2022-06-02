@@ -24,7 +24,6 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    private final MusicRepository musicRepository;
 
     @GetMapping("/auth/signup")
     public String createForm(Model model) {
@@ -115,15 +114,5 @@ public class MemberController {
         System.out.println("bpm:" + bpm);
         return bpm;
     }
-
-    @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
-    List<Music> getUserMusic(@PathVariable("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
-
-        System.out.println("userId:" + userId);
-        return musicRepository.findByUserId(userId);
-
-    }
-
-
-
+    
 }

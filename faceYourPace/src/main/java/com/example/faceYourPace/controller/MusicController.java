@@ -107,6 +107,7 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
+
     @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
     List<Music> getUserMusic(@PathVariable("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
 
