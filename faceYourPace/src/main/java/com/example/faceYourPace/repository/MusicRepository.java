@@ -42,16 +42,16 @@ public class MusicRepository {
                 .getResultList();
     }
 
-    public List<Music> findByMUserId(String userId) {
-        return em.createQuery("select m from Music m where m.mUserId = :userId", Music.class)
-                //.setParameter("userId", userId)
+    public List<Music> findByUserId(String userId) {
+        return em.createQuery("select m from Music m where m.userId = :userId", Music.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 
 
     public List<Music> findByMUserIdPlayList(String mUserId, String name) {
         return em.createQuery("select m from Music m" +
-                        " where m.mUserId = ANY(select u.userId From Member u)", Music.class)
+                        " where m.userId = ANY(select u.userId From Member u)", Music.class)
                 //.setParameter("mUserId", mUserId)
                 .getResultList();
     }

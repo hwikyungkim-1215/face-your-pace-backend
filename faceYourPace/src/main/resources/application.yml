@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://fyp-db.cksdoomihsze.us-west-2.rds.amazonaws.com:3306/fyp_db?serverTimezone=UTC&characterEncoding=UTF-8
-    username: fyp-rds
-    password: fyp12345
+    url: jdbc:mysql://localhost:3306/fyp_db?serverTimezone=UTC&characterEncoding=UTF-8
+    username: fyp_db
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

@@ -43,7 +43,7 @@ public class MusicController {
 
         Music music = new Music();
         music.setMusic_url(form.getMusic_url());
-        music.setMUserId(form.getMUserId());
+        music.setUserId(form.getUserId());
 
         System.out.println("userId:" + userId);
         System.out.println("url:" + music_url);
@@ -107,16 +107,17 @@ public class MusicController {
         return musicRepository.findAll();
     }
 
-    @GetMapping("/api/music/list/all") // 특정 userId의 music table 출력
-    List<Music> getUserMusic(@RequestParam("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
+    @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
+    List<Music> getUserMusic(@PathVariable("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
 
-        return musicRepository.findByMUserId(userId);
+        System.out.println("userId:" + userId);
+        return musicRepository.findByUserId(userId);
 
     }
 
 
-    @GetMapping("/api/music/list/userId/name") // 특정 userId의 특정 playlist의 music table 출력
-    List<Music> getUserPlayListMusic(@RequestParam("userId") String userId, @RequestParam("name") String name) { // (해당 userId의) 음악리스트 출력
+    @GetMapping("/api/music/list/{userId}/{name}") // 특정 userId의 특정 playlist의 music table 출력
+    List<Music> getUserPlayListMusic(@PathVariable("userId") String userId, @PathVariable("name") String name) { // (해당 userId의) 음악리스트 출력
 
         /*
         List<Music> musics = musicService.findByMUserId(userId);
@@ -157,8 +158,8 @@ public class MusicController {
  */
         Music music = musicRepository.findOne(musicId);
         // 음악 변환 후 저장
-        String audio_path = "\"/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".mp3\""; // 원본 음악 저장된 위치
-        String save_path = "\"/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".wav\""; // 변환된 음원 저장할 위치
+        String audio_path = "/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".mp3"; // 원본 음악 저장된 위치
+        String save_path = "/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".wav"; // 변환된 음원 저장할 위치
 
         System.out.println("audio" + audio_path);
         System.out.println("save" + save_path);
@@ -175,12 +176,21 @@ public class MusicController {
         musicService.updateS3Title(musicId, s3T2);
         System.out.println("s3Title update");
 
-        MusicFunctionPython.create("'" + audio_path + "'", "'" + save_path + "'", music.getMusicStart(), music.getMusicEnd(), music.getTarget_bpm());
+        MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), music.getTarget_bpm());
         System.out.println("music 설정값 적용 완료:" + music.getS3Title());
 
         ConnectS3.create(music.getS3Title()); // s3 upload
 
-        return "true"; // s3파일명 반환
+        return "true";
+    }
+
+    @GetMapping("/api/music/s3/{musicId}")
+    public String musicS3Url(@PathVariable("musicId") Long musicId) { //성공
+
+        Music music = musicRepository.findOne(musicId);
+        System.out.println("r:" + music.getS3Title());
+
+        return music.getS3Title();
     }
 
 

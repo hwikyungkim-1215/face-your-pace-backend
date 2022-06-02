@@ -18,7 +18,7 @@ public class Music {
     @Column(name = "music_id")
     private Long id;
 
-    private String mUserId; // 음악 추가한 userId
+    private String userId; // 음악 추가한 userId
 
     //private String name; // 플레이리스트 이름
 
