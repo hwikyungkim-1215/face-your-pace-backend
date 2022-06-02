@@ -6,6 +6,7 @@ import com.example.faceYourPace.domain.member.MemberService;
 import com.example.faceYourPace.domain.music.Music;
 import com.example.faceYourPace.domain.music.MusicForm;
 import com.example.faceYourPace.repository.MemberRepository;
+import com.example.faceYourPace.repository.MusicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+    private final MusicRepository musicRepository;
 
     @GetMapping("/auth/signup")
     public String createForm(Model model) {
@@ -96,28 +98,32 @@ public class MemberController {
         return "회원정보 update";
     }
 
-    @GetMapping("/api/recommand/bpm")
-    public String recommandBpm(@PathVariable("memberId") Long memberId, Model model) throws IOException, InterruptedException {
-        Member member = (Member) memberService.findOne(memberId);
+    @PostMapping("/api/recommand/bpm/{userId}")
+    public String recommandBpm(@PathVariable("userId") String userId){
 
-        MemberForm form = new MemberForm();
-        form.setUserName(member.getUserName());
-        form.setUserEmail(member.getUserEmail());
-        form.setUserAge(member.getUserAge());
-        form.setUserHeight(member.getUserHeight());
-        form.setUserWeight(member.getUserWeight());
-        form.setStride(member.getStride());
-        form.setTarget_pace(member.getTarget_pace());
-        form.setWorkout_level(member.getWorkout_level());
+        List<Member> members = memberService.findUserId(userId);
 
-        model.addAttribute("form", form);
+        String bpm = "null";
 
-        // bpm 추천
-        String bpm = RecommandBpmPython.create(member.getUserHeight(), member.getUserAge(), member.getStride(), member.getTarget_pace());
+        for(Member member : members){
+            if(member.getUserId().equals(userId)) {
+                // bpm 추천
+                bpm = RecommandBpmPython.create(member.getGender(), member.getUserAge(), member.getUserHeight(), member.getUserWeight(), member.getWorkout_level(), member.getTarget_pace(), member.getStride());
+            }
+        }
 
         System.out.println("bpm:" + bpm);
         return bpm;
     }
+
+    @GetMapping("/api/music/list/{userId}") // 특정 userId의 music table 출력
+    List<Music> getUserMusic(@PathVariable("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
+
+        System.out.println("userId:" + userId);
+        return musicRepository.findByUserId(userId);
+
+    }
+
 
 
 }

@@ -133,7 +133,7 @@ public class MusicController {
         }
 
          */
-        return musicRepository.findByMUserIdPlayList(userId, name);
+        return musicRepository.findByUserIdPlayList(userId, name);
 
     }
 

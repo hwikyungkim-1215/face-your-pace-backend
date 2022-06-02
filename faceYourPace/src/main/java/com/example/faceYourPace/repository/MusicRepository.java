@@ -49,10 +49,11 @@ public class MusicRepository {
     }
 
 
-    public List<Music> findByMUserIdPlayList(String mUserId, String name) {
-        return em.createQuery("select m from Music m" +
-                        " where m.userId = ANY(select u.userId From Member u)", Music.class)
-                //.setParameter("mUserId", mUserId)
+    public List<Music> findByUserIdPlayList(String userId, String name) {
+        return em.createQuery("select m from Music m where m.id in (select PLM.music.id from PlayListMusic PLM" +
+                        " where PLM.playList.id = (select PL.id from PlayList PL where PL.name = :name  and PL.member.id = (select M.id from Member M where M.userId = :userId)))", Music.class)
+                .setParameter("userId", userId)
+                .setParameter("name",name)
                 .getResultList();
     }
 
