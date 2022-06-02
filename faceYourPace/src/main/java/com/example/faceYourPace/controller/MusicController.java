@@ -1,5 +1,6 @@
 package com.example.faceYourPace.controller;
 
+import com.example.faceYourPace.cmd.ConnectS3;
 import com.example.faceYourPace.cmd.DownloadPython;
 import com.example.faceYourPace.cmd.MusicFunctionPython;
 import com.example.faceYourPace.domain.PlayList;
@@ -50,7 +51,7 @@ public class MusicController {
         System.out.println(music_url);
         String r2 = DownloadPython.create(music_url); // 음악 다운로드(mp3)
         int idx = r2.indexOf("cache");
-        String r = r2.substring(0, idx+1);
+        String r = r2.substring(idx+5);
         //String r = "title<>03:48<>http://hwi/abc.png";
         System.out.println("downloadPython 완료");
 
@@ -70,6 +71,12 @@ public class MusicController {
 
         musicService.saveMusic(music);
         System.out.println("음악 테이블에 저장 완료");
+
+        String s3T = music.getS3Title() + ".mp3";
+        String s3T2 = s3T.replaceAll(" ", "");
+
+        musicService.updateS3Title(music.getId(), s3T2); //s3
+        System.out.println("s3Title update");
 
         return "true";
     }
@@ -93,13 +100,15 @@ public class MusicController {
     }
 
 
+
+
     @GetMapping("/api/music/list") // music table 전체 출력
     List<Music> getAll() { // 음악리스트 출력
         return musicRepository.findAll();
     }
 
     @GetMapping("/api/music/list/all") // 특정 userId의 music table 출력
-    List<Music> getUserMusic(@RequestParam("userId") String userId) { // (해당 userId의) 음악리스트 출력
+    List<Music> getUserMusic(@RequestParam("userId") String userId) { // (해당 userId의) 음악리스트 출력(수정하기ㅠ)
 
         return musicRepository.findByMUserId(userId);
 
@@ -136,7 +145,7 @@ public class MusicController {
 
         musicService.updateMusic(musicId, form.getMusicStart(), form.getMusicEnd(), form.getMusicRepeat(), form.getTarget_bpm());
         System.out.println("음악 설정 update");
-
+/*
         String bpm;
         if(member.getTarget_pace() == null){ // 타겟 bpm이 없을 경우
             bpm = "0";
@@ -144,16 +153,37 @@ public class MusicController {
         else{
             bpm = member.getTarget_pace();
         }
+
+ */
         Music music = musicRepository.findOne(musicId);
         // 음악 변환 후 저장
-        String audio_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle() + ".mp3'"; // 원본 음악 저장된 위치
-        String save_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle() + ".wav'"; // 변환된 음원 저장할 위치
+        String audio_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".mp3'"; // 원본 음악 저장된 위치
+        String save_path = "'/home/ubuntu/face-your-pace-function/fyp_download/result/" + music.getTitle().trim() + ".wav'"; // 변환된 음원 저장할 위치
 
-        MusicFunctionPython.create(audio_path, save_path, music.getMusicStart(), music.getMusicEnd(), bpm);
-        System.out.println("music 설정값 적용 완료");
+        System.out.println("audio" + audio_path);
+        System.out.println("save" + save_path);
+        System.out.println("start" + music.getMusicStart());
+        System.out.println("start_len" +  music.getMusicStart().length());
+        System.out.println("end" + music.getMusicEnd());
+        System.out.println("end_len" + music.getMusicEnd().length());
+        System.out.println("bpm" + music.getTarget_bpm());
+        System.out.println("bpm_len" + music.getTarget_bpm().length());
 
-        return "true";
+        String s3T = music.getS3Title() + ".wav";
+        String s3T2 = s3T.replaceAll(" ", "");
+
+        musicService.updateS3Title(musicId, s3T2);
+        System.out.println("s3Title update");
+
+        MusicFunctionPython.create("'" + audio_path + "'", "'" + save_path + "'", music.getMusicStart(), music.getMusicEnd(), music.getTarget_bpm());
+        System.out.println("music 설정값 적용 완료:" + music.getS3Title());
+
+        ConnectS3.create(music.getS3Title()); // s3 upload
+
+        return "true"; // s3파일명 반환
     }
+
+
 
     @GetMapping("api/music/edit") // 안씀
     public String updateMusicForm(@PathVariable("musicName") Long musicId, Model model) {

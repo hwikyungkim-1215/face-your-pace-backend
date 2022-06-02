@@ -29,5 +29,7 @@ public class MusicForm {
 
     private String target_bpm; //target_bpm
 
+    private String s3Title; // s3에서 파일명
+
     private Timestamp createDate;
 }

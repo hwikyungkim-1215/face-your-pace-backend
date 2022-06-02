@@ -7,29 +7,18 @@ import org.apache.commons.exec.PumpStreamHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-// 음악 저장 후 config 생성시 불러옴
-public class MusicFunctionPython {
+public class ConnectS3 extends Thread{
 
-    public static String create(String audio_path, String save_path, String musicStart, String musicEnd, String target_bpm){
+    public static String create(String musicName){
         System.out.println("Python Call");
-        String[] command = new String[7];
+        String[] command = new String[3];
         command[0] = "python3";
-        //command[1] = "\\workspace\\java-call-python\\src\\main\\resources\\test.py";
-        command[1] = "'/home/ubuntu/face-your-pace-function/fyp_musicmodify/fyp_musicmodify.py'";
-        System.out.println("command[1]:" + command[1]);
-        command[2] = audio_path;
-        System.out.println("wav_path:" + audio_path);
-        //command[2] = "1";
-        command[3] = save_path;
-        System.out.println("save_path:" + save_path);
-        command[4] = musicStart;
-        System.out.println("start:" + musicStart);
-        command[5] = musicEnd;
-        System.out.println("end:" + musicEnd);
-        command[6] = target_bpm;
-        System.out.println("bpm:" + target_bpm);
+        command[1] = "'/home/ubuntu/face-your-pace-function/fyp_download/result/connectS3.py'"; // 파이썬 파일 위치
+        command[2] = "'"+musicName+"'"; // 음악 링크
 
-        System.out.println(command.toString());
+        System.out.println(musicName);
+        System.out.println(command[2]);
+
         try {
             return execPython(command);
         } catch (Exception e) {
@@ -48,7 +37,7 @@ public class MusicFunctionPython {
         PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
         DefaultExecutor executor = new DefaultExecutor();
         executor.setStreamHandler(pumpStreamHandler);
-        int result = executor.execute(commandLine); // 여기서 오류남
+        int result = executor.execute(commandLine);
         System.out.println("result: " + result);
         System.out.println("output: " + outputStream.toString());
         System.out.println("mp3 파일 다운 완료");
@@ -56,5 +45,4 @@ public class MusicFunctionPython {
         return outputStream.toString();
 
     }
-
 }

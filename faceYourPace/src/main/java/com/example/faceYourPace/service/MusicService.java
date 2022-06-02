@@ -31,6 +31,12 @@ public class MusicService {
         music.setTarget_bpm(target_bpm);
     }
 
+    @Transactional
+    public void updateS3Title(Long musicId, String s3Title) {
+        Music music = musicRepository.findOne(musicId);
+        music.setS3Title(s3Title);
+    }
+
     public List<Music> findMusics() {
         return musicRepository.findAll();
     }
