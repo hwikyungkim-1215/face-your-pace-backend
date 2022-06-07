@@ -51,7 +51,7 @@ public class MusicController {
         System.out.println(music_url);
         String r2 = DownloadPython.create(music_url); // 음악 다운로드(mp3)
         int idx = r2.indexOf("cache");
-        String r = r2.substring(idx+5);
+        String r = r2.substring(idx+5).trim();
         //String r = "title<>03:48<>http://hwi/abc.png";
         System.out.println("downloadPython 완료");
 
@@ -76,7 +76,8 @@ public class MusicController {
         String s3T2 = s3T.replaceAll(" ", "");
 
         musicService.updateS3Title(music.getId(), s3T2); //s3
-        System.out.println("s3Title update");
+	ConnectS3.create(music.getS3Title()); // s3 upload
+	System.out.println("s3Title update");
 
         return "true";
     }

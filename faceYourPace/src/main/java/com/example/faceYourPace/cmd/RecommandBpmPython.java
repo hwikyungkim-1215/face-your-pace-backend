@@ -38,7 +38,6 @@ public class RecommandBpmPython {
         command[8] = stride;
         System.out.println("stride:" + stride);
 
-
         try {
             return execPython(command);
         } catch (Exception e) {
