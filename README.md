@@ -138,6 +138,11 @@ Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움�
 <img width="1170" alt="bpm추천22" src="https://user-images.githubusercontent.com/56347876/172795882-4c704a9e-ff42-4744-8ae2-b2f0bf1f5ff7.png">
 
 
+ ### 6️⃣ 사용자 정보 조회
+
+<img width="1627" alt="10 정보조회" src="https://user-images.githubusercontent.com/56347876/172769449-bd36373c-493a-4c9b-b719-54c8235f5df0.png">
+
+
 
 ### 🛠️ 기술스택
 
