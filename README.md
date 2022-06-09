@@ -162,7 +162,7 @@ Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움�
 
 [📌 API 명세서](https://light-bay-b64.notion.site/API-a332d9c7632a4fe18ed4f120ff4eee74)
 
-[📌 노션](https://light-bay-b64.notion.site/Face-Your-Pace-7f3801ddb7954ac391828738611ef13c) 
+[📌 노션](https://light-bay-b64.notion.site/Face-Your-Pace-7f3801ddb7954ac391828738611ef13c)
 
 [📌 Github(Frontend)](https://github.com/2022-1-Capstone-Project/face-your-pace-frontend)
 
