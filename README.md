@@ -129,8 +129,6 @@ Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움�
  ### 4️⃣ 음악 설정값 수정(config)
 
 <img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
-<img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
-<img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
 
 
  ### 5️⃣ 사용자 신체 조건에 적합한 BPM 추천
