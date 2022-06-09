@@ -1,4 +1,4 @@
-# Face Your Pace
+# Face Your Pace - 카우러너
 
 ### 목차
 
@@ -15,6 +15,7 @@
 [💻 2022 캡스톤 디자인 경진대회 설명페이지](https://www.swaicau.com/bbs/board.php?bo_table=program8)
 
 본 프로젝트는 2022 캡스톤 디자인 경진대회에 참여하는 프로젝트임을 밝힙니다.
+
 2022 캡스톤 디자인 경진대회 참여 링크 : https://www.swaicau.com/bbs/board.php?bo_table=program8&wr_id=136
 
 
@@ -22,9 +23,13 @@
 
 # 🏃 서비스 소개
 페이스 조절을 통해 운동 효율을 높여요!
+
 Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움을 주어 운동 효율을 극대화시킬 수 있는 음악을 제공하는 스마트폰 앱이다.
 
 <img width="903" alt="fyp표지" src="https://user-images.githubusercontent.com/56347876/172767446-63bf4b84-1afb-46c9-a566-b06c883bd899.png">
+
+소개 및 데모 영상: https://www.youtube.com/watch?v=BbRuUzSmnZ0&ab_channel=%EA%B9%80%EC%9D%98%EC%B0%AC
+
 
 ### 🌞 프로젝트 동기
 
@@ -90,8 +95,8 @@ Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움�
 
 # ⏰ 개발 기간 (2022.02.27 ~ 2022.06.10)
 
-기획 : 2022.01.21 ~ 2022.01.28    
-개발 : 2022.01.28 ~ 2022.02.05
+기획 : 2022.02.27 ~ 2022.03.09    
+개발 : 2022.03.10 ~ 2022.06.10
 
 
 # 🛠️ 백엔드 실행
@@ -100,40 +105,40 @@ Face Your Pace 는 달리기를 하는 사람들의 페이스 조절에 도움�
 > cd build/libs   
 > javr -jar faceYourPace-0.0.1-SNAPSHOT.jar
 
-
 # 🏃 주요기능 소개
 
 ### 1️⃣ 로그인, 회원가입
 
 <img width="1617" alt="1 로그인'" src="https://user-images.githubusercontent.com/56347876/172768562-01e41f7d-5760-4100-9453-a981fe719d9d.png">
-108
-<img width="1629" alt="2 회원가입" src="https://user-images.githubusercontent.com/56347876/172768607-7948eadc-d902-42ff-b9ed-5fb5a09bb97d.png">
-109
-<img width="1620" alt="3 회원가입2" src="https://user-images.githubusercontent.com/56347876/172768645-c457a68b-bbba-4bad-8e67-164c552dadfc.png">
+<img width="1629" alt="2 회원가입" src="https://user-images.githubusercontent.com/56347876/172768607-7948eadc-d902-42ff-b9ed-5fb5a09bb97d.png"> 
+<img width="1162" alt="회원가입222" src="https://user-images.githubusercontent.com/56347876/172796209-2a3881e9-3a88-45e1-807c-5181050db57c.png">
+
 
 ### 2️⃣ 메인 홈, 음악 추가
 
 <img width="1629" alt="4 홈" src="https://user-images.githubusercontent.com/56347876/172769095-028714d1-69a3-401d-8c38-1607953fca45.png">
-115
+<img width="1175" alt="홈화면22" src="https://user-images.githubusercontent.com/56347876/172795998-5e32f277-ab34-4160-8204-26d456086827.png">
 <img width="1629" alt="5 음악추가" src="https://user-images.githubusercontent.com/56347876/172769111-ec819169-251d-468e-a9fe-3887f4911e4b.png">
+
 
  ### 3️⃣ 플레이리스트, 스트리밍
 
-<img width="1637" alt="6 플리" src="https://user-images.githubusercontent.com/56347876/172769126-5f42c1bc-2cae-4ac6-b09c-00e978c91d4e.png">
-121
+<img width="1167" alt="플리음악목록" src="https://user-images.githubusercontent.com/56347876/172795931-7a46665a-00c8-4e57-8ee8-5520189dc67a.png">
+<img width="1164" alt="플리음악추가" src="https://user-images.githubusercontent.com/56347876/172795963-a13d6126-7482-46c4-8555-0549eed68f29.png">
 <img width="1625" alt="8 스트리밍" src="https://user-images.githubusercontent.com/56347876/172769363-6866e0f8-379a-4890-8f9d-ebcab4852cf2.png">
+
 
  ### 4️⃣ 음악 설정값 수정(config)
 
 <img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
+<img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
+<img width="1631" alt="7 컨픽" src="https://user-images.githubusercontent.com/56347876/172769348-61f39d46-151a-42e1-8dac-e45cdd7c6433.png">
+
 
  ### 5️⃣ 사용자 신체 조건에 적합한 BPM 추천
 
-<img width="1233" alt="스크린샷 2022-06-09 오후 2 17 34" src="https://user-images.githubusercontent.com/56347876/172769883-ea172678-400e-4557-a146-5cbfb83b920a.png">
+<img width="1170" alt="bpm추천22" src="https://user-images.githubusercontent.com/56347876/172795882-4c704a9e-ff42-4744-8ae2-b2f0bf1f5ff7.png">
 
- ### 6️⃣ 사용자 정보 조회
-
-<img width="1627" alt="10 정보조회" src="https://user-images.githubusercontent.com/56347876/172769449-bd36373c-493a-4c9b-b719-54c8235f5df0.png">
 
 
 ### 🛠️ 기술스택
